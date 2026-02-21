@@ -1,0 +1,46 @@
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 25;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.inner {
+  max-width: 520px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.link {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+
+  &:hover {
+    background: color-mix(in srgb, var(--gold) 10%, transparent);
+    color: var(--text);
+  }
+}
+
+.active {
+  color: var(--text);
+  font-weight: 800;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 18%;
+    right: 18%;
+    bottom: 6px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  }
+}
