@@ -1,0 +1,157 @@
+.button {
+  height: 42px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 0 14px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+
+  transition:
+    filter 120ms ease,
+    background 120ms ease,
+    border-color 120ms ease,
+    transform 40ms ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent-2) 70%, transparent);
+    outline-offset: 2px;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.label {
+  line-height: 1;
+}
+
+.iconLeft,
+.iconRight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sizes */
+.size_sm {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.size_md {
+  height: 42px;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+.size_lg {
+  height: 48px;
+  padding: 0 16px;
+  font-size: 15px;
+}
+
+/* Tones (map to your palette tokens) */
+.tone_gold {
+  --btnSolidBg: linear-gradient(135deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent-2));
+  --btnSolidText: var(--base);
+  --btnBorder: color-mix(in srgb, var(--accent) 55%, transparent);
+  --btnHoverBg: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.tone_purple {
+  --btnSolidBg: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-4) 92%, white),
+    color-mix(in srgb, var(--accent-3) 60%, transparent)
+  );
+  --btnSolidText: var(--contrast);
+  --btnBorder: color-mix(in srgb, var(--accent-4) 55%, transparent);
+  --btnHoverBg: color-mix(in srgb, var(--accent-4) 12%, transparent);
+}
+
+.tone_neutral {
+  --btnSolidBg: color-mix(in srgb, var(--contrast-3) 70%, var(--surface));
+  --btnSolidText: var(--contrast);
+  --btnBorder: var(--border-strong);
+  --btnHoverBg: color-mix(in srgb, var(--contrast) 6%, transparent);
+}
+
+.tone_danger {
+  --btnSolidBg: linear-gradient(135deg, #ff6b6b, #ff9a6b);
+  --btnSolidText: #14002b;
+  --btnBorder: color-mix(in srgb, #ff6b6b 55%, transparent);
+  --btnHoverBg: color-mix(in srgb, #ff6b6b 12%, transparent);
+}
+
+/* Variants */
+.variant_solid {
+  background: var(--btnSolidBg);
+  color: var(--btnSolidText);
+  border-color: var(--btnBorder);
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.03);
+  }
+}
+
+.variant_outline {
+  background: transparent;
+  border-color: var(--btnBorder);
+  color: var(--text);
+
+  &:hover:not(:disabled) {
+    background: var(--btnHoverBg);
+  }
+}
+
+.variant_ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text);
+
+  &:hover:not(:disabled) {
+    background: var(--btnHoverBg);
+    border-color: color-mix(in srgb, var(--btnBorder) 60%, transparent);
+  }
+}
+
+/* Loading */
+.loading {
+  pointer-events: none;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, currentColor 25%, transparent);
+  border-top-color: currentColor;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
