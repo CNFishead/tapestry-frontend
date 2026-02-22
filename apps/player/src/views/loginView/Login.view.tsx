@@ -5,14 +5,13 @@ import Link from "next/link";
 import styles from "./Login.module.scss";
 import { useLogin } from "@/lib/auth-hooks";
 import { getLoginErrorMessage, isValidEmail } from "./functions";
-import { Button } from "@tapestry/ui";
+import { Button, Card, CardBody, CardHeader, TextField } from "@tapestry/ui";
 
 export default function LoginView() {
   const login = useLogin();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPass, setShowPass] = useState(false);
 
   const isBusy = login.isPending;
 
@@ -28,79 +27,54 @@ export default function LoginView() {
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.card}>
-        <header className={styles.header}>
+      <Card className={styles.card} padding="lg">
+        <CardHeader>
           <h1 className={styles.title}>Sign in</h1>
           <p className={styles.subtitle}>Use your Tapestry account.</p>
-        </header>
-
-        <form className={styles.form} onSubmit={onSubmit}>
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="email">
-              Email
-            </label>
-            <input
-              id="email"
-              className={styles.input}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-              inputMode="email"
-              disabled={isBusy}
-              placeholder="you@email.com"
-            />
-            {!emailOk && email.length > 0 && <div className={styles.hint}>Enter a valid email.</div>}
-          </div>
-
-          <div className={styles.field}>
-            <label className={styles.label} htmlFor="password">
-              Password
-            </label>
-
-            <div className={styles.passwordRow}>
-              <input
+        </CardHeader>
+        <CardBody>
+          <form className={styles.form} onSubmit={onSubmit}>
+            <div className={styles.field}>
+              <TextField
+                id="email"
+                label="Email"
+                floatingLabel
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                size={"md" as any}
+              />
+            </div>
+            <div className={styles.field}>
+              <TextField
                 id="password"
-                className={styles.input}
-                type={showPass ? "text" : "password"}
+                label="Password"
+                type="password"
+                floatingLabel
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-                disabled={isBusy}
-                placeholder="••••••••"
+                showPasswordToggle
               />
-              <Button
-                variant="outline"
-                type="button"
-                className={styles.ghostBtn}
-                onClick={() => setShowPass((v) => !v)}
-                disabled={isBusy}
-                aria-label={showPass ? "Hide password" : "Show password"}
-              >
-                {showPass ? "Hide" : "Show"}
-              </Button>
             </div>
+            {login.isError && (
+              <div className={styles.errorBox} role="alert">
+                {getLoginErrorMessage(login.error)}
+              </div>
+            )}
+            <Button className={styles.primaryBtn} type="submit" disabled={!canSubmit}>
+              {isBusy ? "Signing in…" : "Sign in"}
+            </Button>
+          </form>
+
+          <div className={styles.links}>
+            <Link href="/forgot-password" className={styles.link}>
+              Forgot password?
+            </Link>
+            <Link href="/register" className={styles.link}>
+              Create account
+            </Link>
           </div>
-
-          {login.isError && (
-            <div className={styles.errorBox} role="alert">
-              {getLoginErrorMessage(login.error)}
-            </div>
-          )}
-
-          <Button className={styles.primaryBtn} type="submit" disabled={!canSubmit}>
-            {isBusy ? "Signing in…" : "Sign in"}
-          </Button>
-        </form>
-
-        <div className={styles.links}>
-          <Link href="/forgot-password" className={styles.link}>
-            Forgot password?
-          </Link>
-          <Link href="/register" className={styles.link}>
-            Create account
-          </Link>
-        </div>
-      </div>
+        </CardBody>
+      </Card>
     </div>
   );
 }
