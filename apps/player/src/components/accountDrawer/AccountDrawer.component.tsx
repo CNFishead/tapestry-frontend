@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMe, useLogout } from "@/lib/auth-hooks";
 import styles from "./AccountDrawer.module.scss";
+import { Button } from "@tapestry/ui";
+
 
 type Props = {
   open: boolean;
@@ -48,7 +50,7 @@ export default function AccountDrawer({ open, onClose }: Props) {
         </nav>
 
         <div className={styles.footer}>
-          <button
+          <Button
             className={styles.logoutBtn}
             onClick={() => {
               logout();
@@ -57,7 +59,7 @@ export default function AccountDrawer({ open, onClose }: Props) {
             }}
           >
             Log out
-          </button>
+          </Button>
         </div>
       </aside>
     </div>

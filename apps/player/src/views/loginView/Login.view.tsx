@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./Login.module.scss";
 import { useLogin } from "@/lib/auth-hooks";
 import { getLoginErrorMessage, isValidEmail } from "./functions";
+import { Button } from "@tapestry/ui";
 
 export default function LoginView() {
   const login = useLogin();
@@ -67,7 +68,8 @@ export default function LoginView() {
                 disabled={isBusy}
                 placeholder="••••••••"
               />
-              <button
+              <Button
+                variant="outline"
                 type="button"
                 className={styles.ghostBtn}
                 onClick={() => setShowPass((v) => !v)}
@@ -75,7 +77,7 @@ export default function LoginView() {
                 aria-label={showPass ? "Hide password" : "Show password"}
               >
                 {showPass ? "Hide" : "Show"}
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -85,9 +87,9 @@ export default function LoginView() {
             </div>
           )}
 
-          <button className={styles.primaryBtn} type="submit" disabled={!canSubmit}>
+          <Button className={styles.primaryBtn} type="submit" disabled={!canSubmit}>
             {isBusy ? "Signing in…" : "Sign in"}
-          </button>
+          </Button>
         </form>
 
         <div className={styles.links}>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRegister } from "@/lib/auth-hooks";
 import styles from "./Register.module.scss";
 import { getRegisterErrorMessage, isValidEmail, isValidPhone } from "./functions";
+import { Button } from "@tapestry/ui";
 
 export default function RegisterView() {
   const reg = useRegister();
@@ -127,9 +128,9 @@ export default function RegisterView() {
                 disabled={busy}
               />
 
-              <button type="button" className={styles.ghostBtn} onClick={() => setShowPass((v) => !v)} disabled={busy}>
+              <Button type="button" className={styles.ghostBtn} onClick={() => setShowPass((v) => !v)} disabled={busy}>
                 {showPass ? "Hide" : "Show"}
-              </button>
+              </Button>
             </div>
 
             {!passOk && password.length > 0 && (
@@ -159,9 +160,9 @@ export default function RegisterView() {
             </div>
           )}
 
-          <button className={styles.primaryBtn} type="submit" disabled={!canSubmit}>
+          <Button className={styles.primaryBtn} type="submit" disabled={!canSubmit}>
             {busy ? "Creating…" : "Create account"}
-          </button>
+          </Button>
 
           <div className={styles.footerText}>
             Already have an account? <Link href="/login">Sign in</Link>
