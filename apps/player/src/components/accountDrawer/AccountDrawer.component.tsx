@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMe, useLogout } from "@/lib/auth-hooks";
 import styles from "./AccountDrawer.module.scss";
 import { Button } from "@tapestry/ui";
-
 
 type Props = {
   open: boolean;
@@ -39,6 +39,15 @@ export default function AccountDrawer({ open, onClose }: Props) {
         </div>
 
         <div className={styles.profile}>
+          <div className={styles.logoContainer}>
+            <Image
+              src="https://res.cloudinary.com/dmc7wmarf/image/upload/v1771775270/ChatGPT_Image_Jan_10_2026_11_32_39_AM_-_Copy_bcpc4f.png"
+              alt="Tapestry Logo"
+              width={200}
+              height={200}
+              className={styles.logo}
+            />
+          </div>
           <div className={styles.name}>{me?.fullName ?? "Adventurer"}</div>
           <div className={styles.email}>{me?.email ?? ""}</div>
         </div>

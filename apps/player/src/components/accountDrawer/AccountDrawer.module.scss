@@ -5,6 +5,11 @@
   background: rgba(0, 0, 0, 0.55);
 }
 
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
 .drawer {
   position: absolute;
   top: 0;
