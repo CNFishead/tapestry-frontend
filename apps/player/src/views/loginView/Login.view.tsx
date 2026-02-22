@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Login.module.scss";
 import { useLogin } from "@/lib/auth-hooks";
 import { getLoginErrorMessage, isValidEmail } from "./functions";
@@ -29,8 +30,18 @@ export default function LoginView() {
     <div className={styles.wrap}>
       <Card className={styles.card} padding="lg">
         <CardHeader>
-          <h1 className={styles.title}>Sign in</h1>
-          <p className={styles.subtitle}>Use your Tapestry account.</p>
+          <div className={styles.logoContainer}>
+            <Image
+              src={
+                "https://res.cloudinary.com/dmc7wmarf/image/upload/v1771775270/ChatGPT_Image_Jan_10_2026_11_32_39_AM_-_Copy_bcpc4f.png"
+              }
+              alt="Tapestry Logo"
+              width={360}
+              height={360}
+              className={styles.logo}
+            />
+          </div>
+          <h1 className={styles.title}>Welcome back</h1>
         </CardHeader>
         <CardBody>
           <form className={styles.form} onSubmit={onSubmit}>
@@ -66,11 +77,12 @@ export default function LoginView() {
           </form>
 
           <div className={styles.links}>
+            <hr className={styles.divider} />
             <Link href="/forgot-password" className={styles.link}>
-              Forgot password?
+              Forgot your password?
             </Link>
             <Link href="/register" className={styles.link}>
-              Create account
+              New here? Create an account
             </Link>
           </div>
         </CardBody>
