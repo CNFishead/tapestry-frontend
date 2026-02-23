@@ -1,17 +1,30 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
+import { Sidebar, SidebarGroup } from "@tapestry/ui";
+import { BiCog, BiHome, BiLibrary, BiShoppingBag, BiTable } from "react-icons/bi";
 
 export const metadata: Metadata = {
   title: "Tapestry Admin",
   description: "Manage content, products, and tables",
 };
-
-const nav = [
-  { href: "/", label: "Dashboard" },
-  { href: "/content", label: "Content" },
-  { href: "/products", label: "Products" },
-  { href: "/tables", label: "Tables" },
+const sidebarGroups: SidebarGroup[] = [
+  {
+    title: "Main",
+    links: [{ href: "/", label: "Dashboard", icon: <BiHome /> }],
+  },
+  {
+    title: "Gameplay",
+    links: [
+      { href: "/content", label: "Content", icon: <BiLibrary /> },
+      { href: "/products", label: "Products", icon: <BiShoppingBag /> },
+      { href: "/tables", label: "Tables", icon: <BiTable /> },
+    ],
+  },
+  {
+    title: "Account",
+    links: [{ href: "/settings", label: "Settings", icon: <BiCog /> }],
+  },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,14 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-dvh bg-background text-foreground">
         <div className="grid min-h-dvh grid-cols-[260px_1fr]">
           <aside className="border-r bg-muted/30">
-            <div className="px-4 py-4 font-semibold">Tapestry Admin</div>
-            <nav className="px-2 space-y-1">
-              {nav.map((n) => (
-                <Link key={n.href} href={n.href} className="block rounded px-3 py-2 text-sm hover:bg-muted">
-                  {n.label}
-                </Link>
-              ))}
-            </nav>
+            <Sidebar title="Tapestry Admin" groups={sidebarGroups} />
           </aside>
 
           <div className="flex flex-col">
