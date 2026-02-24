@@ -1,0 +1,115 @@
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: auto;
+  outline: 0;
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.modalMask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.modalContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100%;
+  padding: 20px;
+
+  &.centered {
+    align-items: center;
+  }
+}
+
+.modal {
+  position: relative;
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 1px color-mix(in srgb, var(--contrast) 12%, transparent);
+  max-width: 100%;
+  opacity: 0;
+  transform: scale(0.95) translateY(-20px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid color-mix(in srgb, var(--contrast) 12%, transparent);
+  gap: 16px;
+}
+
+.modalTitle {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.modalClose {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: color-mix(in srgb, var(--contrast) 8%, transparent);
+    color: var(--text);
+  }
+
+  &:active {
+    background: color-mix(in srgb, var(--contrast) 14%, transparent);
+  }
+}
+
+.modalBody {
+  padding: 24px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid color-mix(in srgb, var(--contrast) 12%, transparent);
+}
