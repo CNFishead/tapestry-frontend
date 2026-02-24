@@ -54,13 +54,7 @@ export default function PortalDesktop({ children }: Props) {
       />
       <main className={styles.main}>
         <AlertContainer position="top-right" />
-        <div className={styles.watermark}>
-          <img
-            src="https://res.cloudinary.com/dmc7wmarf/image/upload/v1771775270/ChatGPT_Image_Jan_10_2026_11_32_39_AM_-_Copy_bcpc4f.png"
-            alt=""
-            className={styles.watermarkImage}
-          />
-        </div>
+        <div className={styles.watermark} />
         {children}
       </main>
     </div>

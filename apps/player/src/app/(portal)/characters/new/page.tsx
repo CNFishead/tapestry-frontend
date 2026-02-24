@@ -2,12 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { Button, Card, CardBody, CardHeader } from "@tapestry/ui";
 import styles from "./NewCharacter.module.scss";
 
 export default function NewCharacterPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const startedRef = useRef(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,6 +31,9 @@ export default function NewCharacterPage() {
           throw new Error("Character create did not return an id. Patch API create to return { payload: result }.");
         }
 
+        // Invalidate character list so new character appears when navigating back
+        queryClient.invalidateQueries({ queryKey: ["characters"] });
+
         router.replace(`/characters/${id}?mode=build`);
       } catch (e: any) {
         const msg =
@@ -36,7 +41,7 @@ export default function NewCharacterPage() {
         setError(msg);
       }
     })();
-  }, [router]);
+  }, [router, queryClient]);
 
   return (
     <div className={styles.wrap}>

@@ -122,8 +122,6 @@ export function useDeleteCharacterMutation() {
       addAlert({
         type: "success",
         message: "Character deleted",
-        description: "The character has been successfully deleted.",
-        persistent: true,
       });
     },
   });
