@@ -68,7 +68,7 @@ export default function SheetCard({ character: c }: Props) {
 
       <CardBody className={styles.cardBody}>
         <div className={styles.actionRow}>
-          <Button tone="gold" variant="solid" className={styles.openBtn} onClick={() => router.push(`/sheets/${c._id}`)}>
+          <Button tone="gold" variant="solid" className={styles.openBtn} onClick={() => router.push(`/characters/${c._id}`)}>
             Open
           </Button>
 

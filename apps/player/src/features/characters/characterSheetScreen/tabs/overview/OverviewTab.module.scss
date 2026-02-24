@@ -1,0 +1,95 @@
+/* CONTENT */
+.contentGrid {
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+}
+
+.cardHeader {
+  display: grid;
+  gap: 2px;
+}
+
+.cardTitle {
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.cardHint {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.aspectsGrid {
+  display: grid;
+  gap: 10px;
+}
+
+.aspectTile {
+  border: 1px solid color-mix(in srgb, var(--contrast) 12%, transparent);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.aspectTileTitle {
+  padding: 10px 12px;
+  font-weight: 900;
+  font-size: 12px;
+  background: color-mix(in srgb, var(--base-two) 70%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--contrast) 12%, transparent);
+}
+
+.aspectRows {
+  display: grid;
+}
+
+.aspectRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: color-mix(in srgb, var(--contrast) 6%, transparent);
+  }
+}
+
+.aspectKey {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.aspectValue {
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.glance {
+  display: grid;
+  gap: 10px;
+}
+
+.glanceRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.glanceLabel {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.glanceValue {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--text);
+}
