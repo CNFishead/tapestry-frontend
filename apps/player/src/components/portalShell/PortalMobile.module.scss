@@ -1,35 +1,29 @@
 .shell {
   position: relative;
-  min-height: 100dvh;
-  max-width: 520px;
+  min-height: 100svh;
   margin: 0 auto;
-  padding-bottom: 72px; // space for bottom nav
-}
-
-.watermark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.watermarkImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0.08;
 }
 
 .main {
   position: relative;
-  max-height: 90svh;
+  max-height: calc(100svh - 125px);
   overflow-y: auto;
   z-index: 1;
   padding: 16px 18px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("https://res.cloudinary.com/dmc7wmarf/image/upload/v1771775270/ChatGPT_Image_Jan_10_2026_11_32_39_AM_-_Copy_bcpc4f.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: -1;
+  }
 }
