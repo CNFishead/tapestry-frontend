@@ -183,6 +183,67 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  apps/portal:
+    dependencies:
+      '@tapestry/api-client':
+        specifier: workspace:^
+        version: link:../../packages/api-client
+      '@tapestry/hooks':
+        specifier: workspace:^
+        version: link:../../packages/hooks
+      '@tapestry/rules':
+        specifier: workspace:^
+        version: link:../../packages/rules
+      '@tapestry/types':
+        specifier: workspace:^
+        version: link:../../packages/types
+      '@tapestry/ui':
+        specifier: workspace:^
+        version: link:../../packages/ui
+      axios:
+        specifier: ^1.7.0
+        version: 1.13.5
+      next:
+        specifier: 16.1.6
+        version: 16.1.6(@babel/core@7.29.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      react-icons:
+        specifier: ^5.5.0
+        version: 5.5.0(react@19.2.3)
+      sass:
+        specifier: ^1.97.3
+        version: 1.97.3
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4
+        version: 4.2.0
+      '@types/node':
+        specifier: ^20
+        version: 20.19.33
+      '@types/react':
+        specifier: ^19
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
+      eslint:
+        specifier: ^9
+        version: 9.39.3(jiti@2.6.1)
+      eslint-config-next:
+        specifier: 16.1.6
+        version: 16.1.6(@typescript-eslint/parser@8.56.0(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.3(jiti@2.6.1))(typescript@5.9.3)
+      tailwindcss:
+        specifier: ^4
+        version: 4.2.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   packages/api-client:
     dependencies:
       '@tapestry/types':

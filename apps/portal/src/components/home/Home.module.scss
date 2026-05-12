@@ -1,0 +1,106 @@
+.page {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  gap: clamp(2rem, 6vw, 5.5rem);
+  align-items: end;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: clamp(4rem, 10vh, 7rem) 0 clamp(2rem, 8vh, 5rem);
+}
+
+.hero::before {
+  content: "";
+  position: fixed;
+  inset: auto -10vw -25vh 45vw;
+  z-index: -1;
+  height: 70vh;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 35%, transparent), transparent 62%),
+    linear-gradient(45deg, color-mix(in srgb, var(--paper) 18%, transparent), transparent 58%);
+  clip-path: polygon(18% 0, 100% 20%, 78% 100%, 0 72%);
+  opacity: 0.72;
+}
+
+.copy {
+  max-width: 760px;
+}
+
+.kicker {
+  margin: 0 0 1rem;
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.copy h1 {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(4rem, 12vw, 9rem);
+  line-height: 0.9;
+}
+
+.lede {
+  max-width: 620px;
+  margin: 1.5rem 0 0;
+  color: var(--contrast-2);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.secondaryLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  color: var(--accent-2);
+  font-weight: 800;
+}
+
+.linkRail {
+  display: grid;
+  gap: 0.75rem;
+  align-self: end;
+  padding-bottom: 0.35rem;
+}
+
+.linkRail a {
+  border-top: 1px solid var(--border);
+  padding: 1rem 0;
+  color: var(--contrast);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.linkRail a:hover {
+  color: var(--accent-2);
+}
+
+@media (max-width: 780px) {
+  .hero {
+    min-height: 100svh;
+    grid-template-columns: 1fr;
+    align-items: end;
+    gap: 3rem;
+    width: min(100% - 32px, 560px);
+  }
+
+  .copy h1 {
+    font-size: clamp(3.4rem, 22vw, 6rem);
+  }
+}

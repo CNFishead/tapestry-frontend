@@ -5,9 +5,11 @@
   "scripts": {
     "dev:player": "pnpm --filter @tapestry/player dev",
     "dev:admin": "pnpm --filter @tapestry/admin dev",
+    "dev:portal": "pnpm --filter @tapestry/portal dev",
     "dev": "pnpm -r --parallel dev",
     "build:player": "pnpm --filter @tapestry/player build",
     "build:admin": "pnpm --filter @tapestry/admin build",
+    "build:portal": "pnpm --filter @tapestry/portal build",
     "lint": "pnpm -r lint",
     "build": "pnpm -r build"
   },
