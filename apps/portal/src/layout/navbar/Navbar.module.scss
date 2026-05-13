@@ -1,0 +1,237 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid color-mix(in srgb, var(--contrast-2) 16%, transparent);
+  background: color-mix(in srgb, var(--ink) 82%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: min(1180px, calc(100% - 32px));
+  min-height: 4.9rem;
+  margin: 0 auto;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.8rem);
+  margin-left: auto;
+}
+
+.navLink {
+  color: var(--contrast-2);
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: color 140ms ease;
+}
+
+.navLink:hover {
+  color: var(--paper);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.desktopCta {
+  white-space: nowrap;
+}
+
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.28rem;
+  width: 2.9rem;
+  height: 2.9rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 18%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--base-2) 76%, transparent);
+  color: var(--paper);
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 80ms ease;
+}
+
+.menuButton:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 60%, transparent);
+}
+
+.menuButton:active {
+  transform: translateY(1px);
+}
+
+.menuButtonLine {
+  display: block;
+  width: 1rem;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition:
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+.menuButtonOpen .menuButtonLine:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menuButtonOpen .menuButtonLine:nth-child(2) {
+  opacity: 0;
+}
+
+.menuButtonOpen .menuButtonLine:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.mobileLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.mobileLayerOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileBackdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--ink) 78%, transparent);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.mobileLayerOpen .mobileBackdrop {
+  opacity: 1;
+}
+
+.mobileDrawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  width: min(86vw, 23rem);
+  height: 100svh;
+  padding: 1.25rem;
+  border-left: 1px solid color-mix(in srgb, var(--contrast-2) 14%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--base-2) 92%, black), color-mix(in srgb, var(--ink) 90%, black));
+  box-shadow: -1rem 0 3rem color-mix(in srgb, black 32%, transparent);
+  transform: translateX(100%);
+  transition: transform 220ms ease;
+}
+
+.mobileLayerOpen .mobileDrawer {
+  transform: translateX(0);
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 18%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--base) 70%, transparent);
+  color: var(--paper);
+  font-size: 1.45rem;
+}
+
+.mobileNav {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.mobileLink {
+  display: block;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--contrast) 6%, transparent);
+  color: var(--paper);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.mobilePortalRail {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.mobilePortalLink {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 1.1rem;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.mobilePortalLabel {
+  color: var(--paper);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.mobilePortalDescription {
+  color: var(--contrast-2);
+  font-size: 0.87rem;
+  line-height: 1.5;
+}
+
+.mobileCta {
+  margin-top: auto;
+}
+
+@media (min-width: 920px) {
+  .mobileLayer {
+    display: none;
+  }
+}
+
+@media (max-width: 919px) {
+  .inner {
+    min-height: 4.5rem;
+  }
+
+  .desktopNav,
+  .desktopCta {
+    display: none;
+  }
+
+  .actions {
+    margin-left: auto;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+}

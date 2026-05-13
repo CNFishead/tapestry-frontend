@@ -1,0 +1,219 @@
+.page {
+  position: relative;
+  overflow: clip;
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+
+.page::before {
+  content: '';
+  position: fixed;
+  inset: auto -10vw -25vh 45vw;
+  z-index: -1;
+  height: 70vh;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 35%, transparent), transparent 62%),
+    linear-gradient(45deg, color-mix(in srgb, var(--paper) 18%, transparent), transparent 58%);
+  clip-path: polygon(18% 0, 100% 20%, 78% 100%, 0 72%);
+  opacity: 0.72;
+}
+
+.hero,
+.section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+  padding: clamp(3.5rem, 9vw, 6rem) 0 clamp(3rem, 7vw, 5rem);
+}
+
+.copy {
+  max-width: 44rem;
+}
+
+.kicker,
+.sectionKicker {
+  margin: 0 0 1rem;
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.copy h1,
+.sectionHeader h2 {
+  margin: 0;
+  color: var(--paper);
+  line-height: 0.95;
+}
+
+.copy h1 {
+  font-size: clamp(3.4rem, 9vw, 6.8rem);
+}
+
+.lede,
+.sectionCopy {
+  margin: 1.4rem 0 0;
+  color: var(--contrast-2);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.2rem;
+  padding: 0 1.35rem;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.primaryAction {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent-2) 92%, white), color-mix(in srgb, var(--accent) 84%, black));
+  box-shadow: 0 1rem 2.2rem color-mix(in srgb, var(--accent) 24%, transparent);
+  color: var(--ink);
+}
+
+.secondaryAction {
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--paper);
+}
+
+.spotlight {
+  display: grid;
+  gap: 1rem;
+  padding: 1.45rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+  border-radius: 1.7rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--base-2) 76%, transparent), color-mix(in srgb, var(--ink) 72%, transparent));
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, black 18%, transparent);
+}
+
+.spotlightLabel {
+  margin: 0;
+  color: var(--paper);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.spotlightList {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--contrast-2);
+  line-height: 1.55;
+}
+
+.section {
+  scroll-margin-top: 6.5rem;
+  padding-bottom: clamp(2rem, 5vw, 3.2rem);
+}
+
+.sectionHeader {
+  max-width: 44rem;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeader h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.valueGrid,
+.portalGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.valueGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.valueCard,
+.portalCard {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 12%, transparent);
+  border-radius: 1.5rem;
+  background: color-mix(in srgb, var(--base-2) 70%, transparent);
+  box-shadow: 0 0.8rem 2rem color-mix(in srgb, black 12%, transparent);
+}
+
+.valueCard h3,
+.portalLabel {
+  margin: 0;
+  color: var(--paper);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.valueCard p,
+.portalDescription {
+  margin: 0;
+  color: var(--contrast-2);
+  line-height: 1.6;
+}
+
+.portalGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.portalCard {
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease;
+}
+
+.portalCard:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.portalMeta {
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .valueGrid,
+  .portalGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .copy h1 {
+    font-size: clamp(3rem, 17vw, 4.8rem);
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+}
