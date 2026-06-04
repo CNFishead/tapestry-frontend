@@ -1,8 +1,8 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { useForm } from '@freeagentmono/ui';
-import { setCustomPassword } from '@freeagentmono/api-client';
+import { useForm } from '@tapestry/ui';
+import { setCustomPassword } from '@tapestry/api-client';
 import type { AxiosInstance } from 'axios';
 
 export type PasswordFormValues = {

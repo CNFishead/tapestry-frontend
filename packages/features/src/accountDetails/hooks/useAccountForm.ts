@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAlert, useForm } from '@freeagentmono/ui';
-import { me, updateUserAccount } from '@freeagentmono/api-client';
+import { useAlert, useForm } from '@tapestry/ui';
+import { me, updateUserAccount } from '@tapestry/api-client';
 import type { AxiosInstance } from 'axios';
 
 export type AccountFormValues = {
@@ -40,7 +40,7 @@ export function useAccountForm(api: AxiosInstance, userId: string, onSuccess?: (
     },
     onError: (error: any) => {
       addAlert({ type: 'error', message: `Failed to update account information. Please try again: ${error.message}` });
-    }
+    },
   });
 
   const form = useForm<AccountFormValues>({

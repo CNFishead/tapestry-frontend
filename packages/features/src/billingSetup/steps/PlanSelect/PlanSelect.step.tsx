@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button } from '@freeagentmono/ui';
+import { Button } from '@tapestry/ui';
 import type { AxiosInstance } from 'axios';
 import type { FeaturePlan, BillingCycle } from '../../BillingSetup.types';
 import { FeaturePlanCard } from './FeaturePlanCard';

@@ -1,8 +1,8 @@
 import React from 'react';
-import type { ITransaction } from '@freeagentmono/types';
-import { Card, CardHeader, CardBody, Table } from '@freeagentmono/ui';
-import type { TableColumn } from '@freeagentmono/ui';
-import { formatDate } from '@freeagentmono/utils';
+import type { ITransaction } from '@tapestry/types';
+import { Card, CardHeader, CardBody, Table } from '@tapestry/ui';
+import type { TableColumn } from '@tapestry/ui';
+import { formatDate } from '@tapestry/utils';
 import styles from './sections.module.scss';
 
 interface TransactionHistorySectionProps {

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { Modal, TextField, TextAreaField, SelectField, Form, FormField, useForm } from '@freeagentmono/ui';
+import { Modal, TextField, TextAreaField, SelectField, Form, FormField, useForm } from '@tapestry/ui';
 import type { AxiosInstance } from 'axios';
-import { useCreateTicket, useSupportGroups } from '@freeagentmono/hooks';
+import { useCreateTicket, useSupportGroups } from '@tapestry/hooks';
 import styles from './CreateTicketModal.module.scss';
 
 interface CreateTicketModalProps {

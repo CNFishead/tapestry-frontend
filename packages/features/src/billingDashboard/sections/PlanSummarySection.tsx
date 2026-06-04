@@ -1,7 +1,7 @@
 import React from 'react';
-import type { IBilling } from '@freeagentmono/types';
-import { Card, CardHeader, CardBody } from '@freeagentmono/ui';
-import { formatDate } from '@freeagentmono/utils';
+import type { IBilling } from '@tapestry/types';
+import { Card, CardHeader, CardBody } from '@tapestry/ui';
+import { formatDate } from '@tapestry/utils';
 import styles from './sections.module.scss';
 
 interface PlanSummarySectionProps {

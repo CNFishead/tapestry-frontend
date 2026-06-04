@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { Card, CardHeader, CardBody } from '@freeagentmono/ui';
-import type { ISupportTicket } from '@freeagentmono/types';
-import { formatDate } from '@freeagentmono/utils';
+import { Card, CardHeader, CardBody } from '@tapestry/ui';
+import type { ISupportTicket } from '@tapestry/types';
+import { formatDate } from '@tapestry/utils';
 import styles from './TicketMetaPanel.module.scss';
 
 interface TicketMetaPanelProps {

@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
-import { Card, CardBody, Button, TextArea } from '@freeagentmono/ui';
-import { useTicketMessages, useSendMessage } from '@freeagentmono/hooks';
+import { Card, CardBody, Button, TextArea } from '@tapestry/ui';
+import { useTicketMessages, useSendMessage } from '@tapestry/hooks';
 import type { AxiosInstance } from 'axios';
-import type { TicketStatus } from '@freeagentmono/types';
-import { timeDifference } from '@freeagentmono/utils';
+import type { TicketStatus } from '@tapestry/types';
+import { timeDifference } from '@tapestry/utils';
 import styles from './MessageThread.module.scss';
 
 interface MessageThreadProps {

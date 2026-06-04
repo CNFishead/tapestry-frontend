@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosInstance } from 'axios';
-import { Button } from '@freeagentmono/ui';
+import { Button } from '@tapestry/ui';
 import type { FeaturePlan, BillingCycle } from '../../BillingSetup.types';
 import styles from './ReviewAndSubmit.module.scss';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Button, Modal } from '@freeagentmono/ui';
+import { Button, Modal } from '@tapestry/ui';
 
 interface CancelAccountModalProps {
   open: boolean;

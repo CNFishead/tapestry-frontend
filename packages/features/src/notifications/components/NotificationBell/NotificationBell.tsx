@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import type { INotification } from '@freeagentmono/types';
+import type { INotification } from '@tapestry/types';
 import type { NotificationLinkResolver } from '../../Notifications.types';
 import { NotificationItem } from '../NotificationItem/NotificationItem';
 import styles from './NotificationBell.module.scss';

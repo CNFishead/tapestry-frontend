@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Card, CardBody } from '@freeagentmono/ui';
-import type { ISupportTicket } from '@freeagentmono/types';
+import { Card, CardBody } from '@tapestry/ui';
+import type { ISupportTicket } from '@tapestry/types';
 import styles from './TicketStatsRow.module.scss';
 
 interface TicketStatsRowProps {

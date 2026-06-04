@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Button, Card, CardBody, CardHeader, Form, FormField, FormGroup, Input, Loader, Switcher, TextField, Tooltip } from '@freeagentmono/ui';
+import { Button, Card, CardBody, CardHeader, Form, FormField, FormGroup, Input, Loader, Switcher, TextField, Tooltip } from '@tapestry/ui';
 import { useAccountForm } from './hooks/useAccountForm';
 import { usePasswordForm } from './hooks/usePasswordForm';
 import { CancelAccountModal } from './CancelAccountModal';
 import type { AccountDetailsProps } from './AccountDetails.types';
 import styles from './AccountDetails.module.scss';
-import { useBilling } from '@freeagentmono/hooks';
+import { useBilling } from '@tapestry/hooks';
 
 export function AccountDetails({ userId, api, onSaveSuccess, onPasswordSuccess, notificationFeatures = {}, onSmsToggle, showCancelSection, onCancelSuccess }: AccountDetailsProps) {
   const [isEditing, setIsEditing] = useState(false);

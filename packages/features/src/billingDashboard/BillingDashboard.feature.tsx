@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useBilling, useTransactions } from '@freeagentmono/hooks';
-import { Loader } from '@freeagentmono/ui';
+import { useBilling, useTransactions } from '@tapestry/hooks';
+import { Loader } from '@tapestry/ui';
 import { PlanSummarySection } from './sections/PlanSummarySection';
 import { PaymentMethodSection } from './sections/PaymentMethodSection';
 import { TransactionHistorySection } from './sections/TransactionHistorySection';

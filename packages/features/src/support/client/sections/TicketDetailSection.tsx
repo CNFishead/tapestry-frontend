@@ -2,8 +2,8 @@
 
 import React from 'react';
 import type { AxiosInstance } from 'axios';
-import { useTicket } from '@freeagentmono/hooks';
-import { Loader } from '@freeagentmono/ui';
+import { useTicket } from '@tapestry/hooks';
+import { Loader } from '@tapestry/ui';
 import { MessageThread } from './MessageThread';
 import { TicketMetaPanel } from './TicketMetaPanel';
 import styles from './TicketDetailSection.module.scss';

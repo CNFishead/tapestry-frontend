@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useTickets } from '@freeagentmono/hooks';
-import { Loader, Button } from '@freeagentmono/ui';
+import { useTickets } from '@tapestry/hooks';
+import { Loader, Button } from '@tapestry/ui';
 import { TicketStatsRow } from './sections/TicketStatsRow';
 import { TicketListSection } from './sections/TicketListSection';
 import { TicketDetailSection } from './sections/TicketDetailSection';

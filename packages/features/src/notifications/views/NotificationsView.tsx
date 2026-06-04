@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { Loader, Button } from '@freeagentmono/ui';
+import { Loader, Button } from '@tapestry/ui';
 import type { NotificationLinkResolver, UseNotificationsResult } from '../Notifications.types';
 import { NotificationItem } from '../components/NotificationItem/NotificationItem';
 import styles from './NotificationsView.module.scss';

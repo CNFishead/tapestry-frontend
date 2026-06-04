@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Table, Button } from '@freeagentmono/ui';
-import type { TableColumn } from '@freeagentmono/ui';
+import { Table, Button } from '@tapestry/ui';
+import type { TableColumn } from '@tapestry/ui';
 import type { AxiosInstance } from 'axios';
-import type { ISupportTicket } from '@freeagentmono/types';
-import { formatDate } from '@freeagentmono/utils';
+import type { ISupportTicket } from '@tapestry/types';
+import { formatDate } from '@tapestry/utils';
 import { CreateTicketModal } from './CreateTicketModal';
 import styles from './TicketListSection.module.scss';
 

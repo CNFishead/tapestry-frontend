@@ -1,4 +1,4 @@
-import type { INotification } from '@freeagentmono/types';
+import type { INotification } from '@tapestry/types';
 
 /** App-supplied resolver: return a route string or null (no navigation for this type). */
 export type NotificationLinkResolver = (notification: INotification) => string | null;

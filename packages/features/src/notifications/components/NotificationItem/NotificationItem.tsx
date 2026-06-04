@@ -3,7 +3,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import type { INotification } from '@freeagentmono/types';
+import type { INotification } from '@tapestry/types';
 import type { NotificationLinkResolver } from '../../Notifications.types';
 import styles from './NotificationItem.module.scss';
 import Link from 'next/link';

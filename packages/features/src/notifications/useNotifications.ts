@@ -3,8 +3,8 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import type { AxiosInstance } from 'axios';
-import type { INotification } from '@freeagentmono/types';
-import { fetchNotifications, markNotificationRead, markAllNotificationsRead } from '@freeagentmono/api-client';
+import type { INotification } from '@tapestry/types';
+import { fetchNotifications, markNotificationRead, markAllNotificationsRead } from '@tapestry/api-client';
 import type { UseNotificationsOptions, UseNotificationsResult } from './Notifications.types';
 
 const DEFAULT_REFETCH_INTERVAL = 60_000;

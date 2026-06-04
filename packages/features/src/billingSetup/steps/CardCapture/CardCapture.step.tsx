@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import type { Stripe, StripeCardElementChangeEvent } from '@stripe/stripe-js';
-import { Button } from '@freeagentmono/ui';
+import { Button } from '@tapestry/ui';
 import styles from './CardCapture.module.scss';
 
 interface BillingAddress {

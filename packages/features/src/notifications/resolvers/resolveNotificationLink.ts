@@ -1,4 +1,4 @@
-import type { INotification } from '@freeagentmono/types';
+import type { INotification } from '@tapestry/types';
 
 /**
  * Base resolver — returns null for all notification types.
