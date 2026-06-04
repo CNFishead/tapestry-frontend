@@ -13,11 +13,15 @@ export type SiteNavigationGroup = {
 export const primaryNavigationLinks: SiteNavigationLink[] = [
   {
     label: 'Why Tapestry',
-    href: '/#why-tapestry',
+    href: '/#difference',
   },
   {
-    label: 'Portals',
-    href: '/#portals',
+    label: 'How It Plays',
+    href: '/#how-it-plays',
+  },
+  {
+    label: 'Community',
+    href: '/#community',
   },
 ];
 
@@ -27,13 +31,7 @@ export const platformLinks: SiteNavigationLink[] = [
     href: 'https://player.tapestry-ttrpg.com',
     description: 'Step into campaigns, character play, and session-ready tools.',
     external: true,
-  },
-  {
-    label: 'Storyweaver Tools',
-    href: 'https://admin.tapestry-ttrpg.com',
-    description: 'Manage content, rules, and publishing workflows behind the scenes.',
-    external: true,
-  },
+  }
 ];
 
 export const primaryCallToAction: SiteNavigationLink = {

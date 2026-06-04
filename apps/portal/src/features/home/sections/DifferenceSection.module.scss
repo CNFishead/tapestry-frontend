@@ -1,0 +1,88 @@
+.section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  scroll-margin-top: 6.25rem;
+}
+
+.header {
+  max-width: 44rem;
+  margin-bottom: 1.75rem;
+}
+
+.kicker {
+  margin: 0 0 0.85rem;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.02;
+}
+
+.description {
+  margin: 1rem 0 0;
+  color: var(--contrast-2);
+  font-size: clamp(1rem, 2vw, 1.16rem);
+  line-height: 1.65;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.9rem;
+  min-height: 100%;
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 12%, transparent);
+  border-radius: 1.7rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--base-2) 78%, transparent), color-mix(in srgb, var(--ink) 82%, transparent)),
+    color-mix(in srgb, var(--paper) 3%, transparent);
+  box-shadow: 0 1rem 2.4rem color-mix(in srgb, black 14%, transparent);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent-2) 34%, transparent);
+}
+
+.cardEyebrow {
+  margin: 0;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin: 0;
+  color: var(--paper);
+  font-size: 1.18rem;
+  line-height: 1.2;
+}
+
+.card p:last-child {
+  margin: 0;
+  color: var(--contrast-2);
+  line-height: 1.62;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

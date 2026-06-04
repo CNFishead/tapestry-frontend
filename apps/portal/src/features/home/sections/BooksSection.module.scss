@@ -1,0 +1,130 @@
+.section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  scroll-margin-top: 6.25rem;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 1.8rem;
+}
+
+.header {
+  max-width: 44rem;
+}
+
+.kicker {
+  margin: 0 0 0.85rem;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.02;
+}
+
+.description {
+  margin: 1rem 0 0;
+  color: var(--contrast-2);
+  font-size: clamp(1rem, 2vw, 1.14rem);
+  line-height: 1.65;
+}
+
+.note {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.2rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
+  border-radius: 1.5rem;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.noteLabel,
+.bookMeta {
+  margin: 0;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.noteCopy {
+  margin: 0;
+  color: var(--contrast-2);
+  line-height: 1.58;
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.bookCard {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.45rem;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 12%, transparent);
+  border-radius: 1.7rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--base-2) 78%, transparent), color-mix(in srgb, var(--ink) 84%, transparent)),
+    color-mix(in srgb, var(--paper) 3%, transparent);
+  box-shadow: 0 1rem 2.2rem color-mix(in srgb, black 12%, transparent);
+}
+
+.cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 0.78;
+  border-radius: 1.3rem;
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--accent-3) 48%, transparent), color-mix(in srgb, var(--base) 84%, black)),
+    linear-gradient(180deg, color-mix(in srgb, var(--paper) 4%, transparent), transparent);
+  overflow: hidden;
+}
+
+.coverSpine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 16%;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 72%, transparent), color-mix(in srgb, var(--accent) 64%, transparent));
+}
+
+.coverSigil {
+  position: relative;
+  z-index: 1;
+  color: var(--paper);
+  font-size: clamp(3rem, 6vw, 4.4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.bookCard h3 {
+  margin: 0;
+  color: var(--paper);
+  font-size: 1.16rem;
+}
+
+.bookCard p:last-child {
+  margin: 0;
+  color: var(--contrast-2);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .headerRow,
+  .shelf {
+    grid-template-columns: 1fr;
+  }
+}

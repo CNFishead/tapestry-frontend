@@ -50,8 +50,21 @@
   display: none;
 }
 
+.preserveTaglineOnMobile .tagline {
+  display: block;
+}
+
 @media (max-width: 640px) {
   .tagline {
+    display: none;
+  }
+
+  .preserveTaglineOnMobile .tagline {
+    display: block;
+  }
+
+  .compact .tagline,
+  .compact.preserveTaglineOnMobile .tagline {
     display: none;
   }
 }

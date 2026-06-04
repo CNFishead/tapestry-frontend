@@ -1,0 +1,109 @@
+.section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  scroll-margin-top: 6.25rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.header {
+  padding: 1.8rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+  border-radius: 1.8rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--paper) 4%, transparent), transparent),
+    color-mix(in srgb, var(--base-2) 74%, transparent);
+}
+
+.kicker {
+  margin: 0 0 0.85rem;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.02;
+}
+
+.description {
+  margin: 1rem 0 0;
+  color: var(--contrast-2);
+  font-size: clamp(1rem, 2vw, 1.14rem);
+  line-height: 1.65;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.dialCard {
+  display: grid;
+  gap: 0.95rem;
+  padding: 1.45rem;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 12%, transparent);
+  border-radius: 1.6rem;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--accent-3) 18%, transparent), transparent 42%),
+    color-mix(in srgb, var(--ink) 78%, transparent);
+  box-shadow: 0 1rem 2.2rem color-mix(in srgb, black 12%, transparent);
+}
+
+.dialTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dialTopRow h3 {
+  margin: 0;
+  color: var(--paper);
+  font-size: 1.15rem;
+}
+
+.dialValue {
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.meter {
+  overflow: hidden;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 9%, transparent);
+}
+
+.meterFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent-2) 96%, white), color-mix(in srgb, var(--accent-3) 70%, transparent));
+}
+
+.dialCard p:last-child {
+  margin: 0;
+  color: var(--contrast-2);
+  line-height: 1.62;
+}
+
+@media (max-width: 960px) {
+  .layout,
+  .board {
+    grid-template-columns: 1fr;
+  }
+}

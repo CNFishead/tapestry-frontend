@@ -6,11 +6,12 @@ type BrandMarkProps = {
   compact?: boolean;
   className?: string;
   showTagline?: boolean;
+  preserveTaglineOnMobile?: boolean;
   tabIndex?: number;
 };
 
-export function BrandMark({ compact = false, className, showTagline = true, tabIndex }: BrandMarkProps) {
-  const brandClassName = [styles.brand, compact ? styles.compact : '', className ?? ''].filter(Boolean).join(' ');
+export function BrandMark({ compact = false, className, showTagline = true, preserveTaglineOnMobile = false, tabIndex }: BrandMarkProps) {
+  const brandClassName = [styles.brand, compact ? styles.compact : '', preserveTaglineOnMobile ? styles.preserveTaglineOnMobile : '', className ?? ''].filter(Boolean).join(' ');
 
   return (
     <Link href="/" className={brandClassName} aria-label="Tapestry home" tabIndex={tabIndex}>

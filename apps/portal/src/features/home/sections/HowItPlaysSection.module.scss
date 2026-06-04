@@ -1,0 +1,120 @@
+.section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  scroll-margin-top: 6.25rem;
+}
+
+.header {
+  max-width: 44rem;
+  margin-bottom: 1.9rem;
+}
+
+.kicker {
+  margin: 0 0 0.85rem;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.02;
+}
+
+.description {
+  margin: 1rem 0 0;
+  color: var(--contrast-2);
+  font-size: clamp(1rem, 2vw, 1.14rem);
+  line-height: 1.65;
+}
+
+.track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.track::before {
+  content: '';
+  position: absolute;
+  top: 2.6rem;
+  left: 2rem;
+  right: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent-2) 55%, transparent), color-mix(in srgb, var(--accent-3) 62%, transparent));
+}
+
+.stepCard {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.6rem;
+  border: 1px solid color-mix(in srgb, var(--accent-3) 18%, transparent);
+  border-radius: 1.7rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--paper) 4%, transparent), transparent),
+    color-mix(in srgb, var(--base-2) 74%, transparent);
+  box-shadow: 0 1rem 2.2rem color-mix(in srgb, black 12%, transparent);
+}
+
+.stepNumber {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--base) 86%, transparent);
+  color: var(--paper);
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.stepLabel {
+  margin: 0;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.stepCard h3 {
+  margin: 0;
+  color: var(--paper);
+  font-size: 1.16rem;
+  line-height: 1.25;
+}
+
+.stepCard p:last-child {
+  margin: 0;
+  color: var(--contrast-2);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .track::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .track {
+    grid-template-columns: 1fr;
+  }
+}
