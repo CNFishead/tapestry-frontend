@@ -23,16 +23,15 @@ export function HeroSection() {
         <div className={styles.content}>
           <div className={styles.brandMark}>
             <Image
+              className={styles.brandImage}
               src="https://res.cloudinary.com/wulfdev/image/upload/v1780602173/ChatGPT_Image_Jan_10_2026_11_32_39_AM_-_Copy_j55058.png"
               alt="Tapestry logo"
               width={400}
               height={400}
-              style={{ width: '75%', height: 'auto' }}
+              sizes="(max-width: 720px) 40vw, 22vw"
             />
           </div>
-          <h1 id="home-title">
-            Stories woven through the Threads of Fate
-          </h1>
+          <h1 id="home-title">Stories woven through the Threads of Fate</h1>
         </div>
         <p className={styles.lede}>
           Tapestry is a digital platform for tabletop role-playing games, designed to enhance the storytelling experience and empower players and game masters alike.
