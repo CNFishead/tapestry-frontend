@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@tapestry/ui';
 import { BrandMark } from '@/components/brandMark/BrandMark.component';
-import { platformLinks, primaryCallToAction, primaryNavigationLinks } from '@/layout/navigation/siteNavigation.data';
+import { portalCtas, portalNavigation } from '@/config/portal-navigation';
+import type { PortalNavigationGroup, PortalNavigationItem } from '@/config/portal-navigation';
 import styles from './Navbar.module.scss';
 
 type NavbarProps = {
@@ -12,8 +12,10 @@ type NavbarProps = {
   onCloseMobileMenu: () => void;
 };
 
-function navigateTo(href: string) {
-  window.location.assign(href);
+const portalUtilityLinks = [portalCtas.cart, portalCtas.checkout];
+
+function isPortalNavigationGroup(item: PortalNavigationItem): item is PortalNavigationGroup {
+  return 'items' in item;
 }
 
 export function Navbar({ isMobileMenuOpen, onOpenMobileMenu, onCloseMobileMenu }: NavbarProps) {
@@ -24,17 +26,38 @@ export function Navbar({ isMobileMenuOpen, onOpenMobileMenu, onCloseMobileMenu }
           <BrandMark />
 
           <nav className={styles.desktopNav} aria-label="Primary navigation">
-            {primaryNavigationLinks.map((link) => (
-              <Link key={link.href} href={link.href} className={styles.navLink}>
-                {link.label}
-              </Link>
-            ))}
+            {portalNavigation.map((item) =>
+              isPortalNavigationGroup(item) ? (
+                <details key={item.label} className={styles.navDropdown}>
+                  <summary className={styles.navSummary}>{item.label}</summary>
+                  <div className={styles.dropdownMenu}>
+                    {item.items.map((link) => (
+                      <Link key={link.href} href={link.href} className={styles.dropdownLink}>
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </details>
+              ) : (
+                <Link key={item.href} href={item.href} className={styles.navLink}>
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
 
           <div className={styles.actions}>
-            <Button className={styles.desktopCta} size="md" onClick={() => navigateTo(primaryCallToAction.href)}>
-              {primaryCallToAction.label}
-            </Button>
+            <div className={styles.utilityLinks} aria-label="Utility links">
+              {portalUtilityLinks.map((link) => (
+                <Link key={link.href} href={link.href} className={styles.utilityLink}>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+
+            <Link href={portalCtas.getPlayersGuide.href} className={styles.desktopCta}>
+              {portalCtas.getPlayersGuide.label}
+            </Link>
 
             <button
               type="button"
@@ -60,39 +83,58 @@ export function Navbar({ isMobileMenuOpen, onOpenMobileMenu, onCloseMobileMenu }
             <BrandMark compact tabIndex={isMobileMenuOpen ? 0 : -1} />
 
             <button type="button" className={styles.closeButton} onClick={onCloseMobileMenu} aria-label="Close navigation menu" tabIndex={isMobileMenuOpen ? 0 : -1}>
-              <span aria-hidden="true">×</span>
+              <span aria-hidden="true">x</span>
             </button>
           </div>
 
           <nav className={styles.mobileNav} aria-label="Mobile navigation">
-            {primaryNavigationLinks.map((link) => (
-              <Link key={link.href} href={link.href} className={styles.mobileLink} onClick={onCloseMobileMenu} tabIndex={isMobileMenuOpen ? 0 : -1}>
-                {link.label}
-              </Link>
-            ))}
+            {portalNavigation.map((item) =>
+              isPortalNavigationGroup(item) ? (
+                <section key={item.label} className={styles.mobileGroup} aria-labelledby={`portal-mobile-group-${item.label}`}>
+                  <h2 id={`portal-mobile-group-${item.label}`} className={styles.mobileGroupTitle}>
+                    {item.label}
+                  </h2>
+                  <div className={styles.mobileGroupLinks}>
+                    {item.items.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={styles.mobileLink}
+                        onClick={onCloseMobileMenu}
+                        tabIndex={isMobileMenuOpen ? 0 : -1}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              ) : (
+                <Link key={item.href} href={item.href} className={styles.mobileLink} onClick={onCloseMobileMenu} tabIndex={isMobileMenuOpen ? 0 : -1}>
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
 
-          <div className={styles.mobilePortalRail}>
-            {platformLinks.map((link) => (
-              <a key={link.href} href={link.href} className={styles.mobilePortalLink} onClick={onCloseMobileMenu} tabIndex={isMobileMenuOpen ? 0 : -1}>
-                <span className={styles.mobilePortalLabel}>{link.label}</span>
-                {link.description ? <span className={styles.mobilePortalDescription}>{link.description}</span> : null}
-              </a>
-            ))}
-          </div>
+          <div className={styles.mobileUtilityRail}>
+            <Link href={portalCtas.getPlayersGuide.href} className={styles.mobileCta} onClick={onCloseMobileMenu} tabIndex={isMobileMenuOpen ? 0 : -1}>
+              {portalCtas.getPlayersGuide.label}
+            </Link>
 
-          <Button
-            className={styles.mobileCta}
-            size="lg"
-            fullWidth
-            onClick={() => {
-              onCloseMobileMenu();
-              navigateTo(primaryCallToAction.href);
-            }}
-            tabIndex={isMobileMenuOpen ? 0 : -1}
-          >
-            {primaryCallToAction.label}
-          </Button>
+            <div className={styles.mobileUtilityLinks}>
+              {portalUtilityLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={styles.mobileUtilityLink}
+                  onClick={onCloseMobileMenu}
+                  tabIndex={isMobileMenuOpen ? 0 : -1}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>

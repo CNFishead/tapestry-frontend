@@ -1,14 +1,12 @@
-'use client';
-
-import { Button } from '@tapestry/ui';
-import { BrandMark } from '@/components/brandMark/BrandMark.component';
-import { primaryCallToAction, secondaryCallToAction } from '@/layout/navigation/siteNavigation.data';
-import styles from './HeroSection.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
+import { portalCtas } from '@/config/portal-navigation';
+import styles from './HeroSection.module.scss';
 
-function navigateTo(href: string) {
-  window.location.assign(href);
-}
+const secondaryCallToAction = {
+  label: 'Contact',
+  href: 'mailto:hello@tapestry-ttrpg.com',
+} as const;
 
 const videoSrc = 'https://res.cloudinary.com/wulfdev/video/upload/v1780601263/TapestryStories_llb3ac.mp4';
 
@@ -23,28 +21,26 @@ export function HeroSection() {
 
       <div className={styles.panel}>
         <div className={styles.content}>
-          <div className={styles.brand}>
-            <div className={styles.logoContainer}>
-              <Image
-                src="https://res.cloudinary.com/wulfdev/image/upload/v1780602173/ChatGPT_Image_Jan_10_2026_11_32_39_AM_-_Copy_j55058.png"
-                alt="Tapestry logo"
-                width={400}
-                height={400}
-              />
-            </div>
+          <div className={styles.brandMark}>
+            <Image
+              src="https://res.cloudinary.com/wulfdev/image/upload/v1780602173/ChatGPT_Image_Jan_10_2026_11_32_39_AM_-_Copy_j55058.png"
+              alt="Tapestry logo"
+              width={400}
+              height={400}
+            />
           </div>
-          <h1 id="home-title" className={styles.title}>
+          <h1 id="home-title">
             Stories woven through the Threads of Fate
           </h1>
         </div>
-        <p className={styles.description}>
+        <p className={styles.lede}>
           Tapestry is a digital platform for tabletop role-playing games, designed to enhance the storytelling experience and empower players and game masters alike.
         </p>
 
         <div className={styles.actions}>
-          <Button size="lg" onClick={() => navigateTo(primaryCallToAction.href)}>
-            {primaryCallToAction.label}
-          </Button>
+          <Link href={portalCtas.getPlayersGuide.href} className={styles.primaryAction}>
+            {portalCtas.getPlayersGuide.label}
+          </Link>
 
           <a className={styles.secondaryAction} href={secondaryCallToAction.href}>
             {secondaryCallToAction.label}

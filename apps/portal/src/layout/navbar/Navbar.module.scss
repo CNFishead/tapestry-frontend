@@ -19,20 +19,83 @@
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: clamp(1rem, 2vw, 1.8rem);
+  gap: clamp(1rem, 2vw, 1.4rem);
   margin-left: auto;
 }
 
-.navLink {
+.navLink,
+.navSummary,
+.dropdownLink {
   color: var(--contrast-2);
   font-size: 0.94rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  transition: color 140ms ease;
+  transition:
+    color 140ms ease,
+    background 140ms ease,
+    border-color 140ms ease,
+    transform 140ms ease;
 }
 
-.navLink:hover {
+.navLink:hover,
+.navSummary:hover,
+.dropdownLink:hover {
   color: var(--paper);
+}
+
+.navDropdown {
+  position: relative;
+}
+
+.navSummary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  list-style: none;
+  padding: 0.65rem 0.2rem;
+}
+
+.navSummary::-webkit-details-marker {
+  display: none;
+}
+
+.navSummary::after {
+  content: '';
+  width: 0.42rem;
+  height: 0.42rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-0.1rem) rotate(45deg);
+  transition: transform 140ms ease;
+}
+
+.navDropdown[open] .navSummary::after {
+  transform: translateY(0.1rem) rotate(225deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 0.7rem);
+  left: 0;
+  display: grid;
+  gap: 0.25rem;
+  min-width: 16rem;
+  padding: 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 14%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--base-2) 92%, black);
+  box-shadow: 0 1rem 2.2rem color-mix(in srgb, black 28%, transparent);
+}
+
+.dropdownLink {
+  padding: 0.8rem 0.85rem;
+  border-radius: 0.8rem;
+  background: transparent;
+}
+
+.dropdownLink:hover {
+  background: color-mix(in srgb, var(--paper) 7%, transparent);
 }
 
 .actions {
@@ -41,8 +104,49 @@
   gap: 0.75rem;
 }
 
-.desktopCta {
+.utilityLinks {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.utilityLink,
+.desktopCta,
+.mobileCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0 1rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
   white-space: nowrap;
+}
+
+.utilityLink {
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 16%, transparent);
+  background: color-mix(in srgb, var(--paper) 6%, transparent);
+  color: var(--paper);
+}
+
+.utilityLink:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 48%, transparent);
+  background: color-mix(in srgb, var(--paper) 10%, transparent);
+}
+
+.desktopCta,
+.mobileCta {
+  border: 1px solid color-mix(in srgb, var(--accent) 54%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 28%, var(--paper)), color-mix(in srgb, var(--accent) 22%, var(--paper)));
+  color: var(--ink);
+}
+
+.desktopCta:hover,
+.mobileCta:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 72%, transparent);
+  transform: translateY(-1px);
 }
 
 .menuButton {
@@ -167,6 +271,25 @@
 
 .mobileNav {
   display: grid;
+  gap: 0.95rem;
+}
+
+.mobileGroup {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.mobileGroupTitle {
+  margin: 0;
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mobileGroupLinks {
+  display: grid;
   gap: 0.45rem;
 }
 
@@ -181,34 +304,34 @@
   letter-spacing: 0.03em;
 }
 
-.mobilePortalRail {
+.mobileLink:hover {
+  background: color-mix(in srgb, var(--paper) 10%, transparent);
+}
+
+.mobileUtilityRail {
   display: grid;
-  gap: 0.8rem;
-}
-
-.mobilePortalLink {
-  display: grid;
-  gap: 0.35rem;
-  padding: 1rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
-  border-radius: 1.1rem;
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
-}
-
-.mobilePortalLabel {
-  color: var(--paper);
-  font-size: 0.95rem;
-  font-weight: 800;
-}
-
-.mobilePortalDescription {
-  color: var(--contrast-2);
-  font-size: 0.87rem;
-  line-height: 1.5;
-}
-
-.mobileCta {
+  gap: 0.85rem;
   margin-top: auto;
+}
+
+.mobileUtilityLinks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.mobileUtilityLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--contrast-2) 16%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 6%, transparent);
+  color: var(--paper);
+  font-size: 0.9rem;
+  font-weight: 800;
 }
 
 @media (min-width: 920px) {
@@ -223,6 +346,7 @@
   }
 
   .desktopNav,
+  .utilityLinks,
   .desktopCta {
     display: none;
   }

@@ -30,7 +30,17 @@
 }
 
 .cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
+  min-height: 2.9rem;
+  padding: 0 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 54%, transparent);
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 28%, var(--paper)), color-mix(in srgb, var(--accent) 22%, var(--paper)));
+  color: var(--ink);
+  font-weight: 800;
 }
 
 .linkColumns {

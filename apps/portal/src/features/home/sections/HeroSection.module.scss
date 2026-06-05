@@ -94,6 +94,7 @@
 }
 
 .brandMark {
+  display: flex;
   justify-content: center;
   text-align: center;
 }
@@ -117,6 +118,29 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 1.35rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 54%, transparent);
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 28%, var(--paper)), color-mix(in srgb, var(--accent) 22%, var(--paper)));
+  color: var(--ink);
+  font-weight: 800;
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.primaryAction:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent-2) 70%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 34%, var(--paper)), color-mix(in srgb, var(--accent) 28%, var(--paper)));
 }
 
 .secondaryAction {
@@ -187,6 +211,7 @@
     align-items: stretch;
   }
 
+  .primaryAction,
   .secondaryAction {
     width: 100%;
   }

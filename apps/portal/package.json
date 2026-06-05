@@ -9,11 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@tapestry/api-client": "workspace:^",
-    "@tapestry/hooks": "workspace:^",
-    "@tapestry/rules": "workspace:^",
-    "@tapestry/types": "workspace:^",
-    "@tapestry/ui": "workspace:^",
+    "@tapestry/utils": "workspace:*",
+    "@tapestry/ui": "workspace:*",
+    "@tapestry/styles": "workspace:*",
+    "@tapestry/types": "workspace:*",
+    "@tapestry/hooks": "workspace:*",
+    "@tapestry/api-client": "workspace:*",
     "axios": "^1.7.0",
     "next": "16.1.6",
     "react": "19.2.3",

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.css';
+import "@tapestry/styles/index.scss";
+import './global.scss';
 import { SiteShell } from '@/layout/siteShell/SiteShell.layout';
 
 export const metadata: Metadata = {
