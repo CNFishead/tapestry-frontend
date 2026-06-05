@@ -33,7 +33,7 @@
 
 .stack {
   display: grid;
-  gap: clamp(3rem, 7vw, 5.5rem); 
+  gap: clamp(1rem, 7vw, 3.5rem); 
 }
 
 @media (max-width: 900px) {
