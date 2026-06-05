@@ -1,7 +1,7 @@
-export { BooksSection } from './BooksSection';
-export { CommunitySection } from './CommunitySection';
-export { DifferenceSection } from './DifferenceSection';
-export { DialsSection } from './DialsSection';
-export { HeroSection } from './HeroSection';
-export { HowItPlaysSection } from './HowItPlaysSection';
-export { PlaytestInfoSection } from './PlaytestInfoSection';
+export { BooksSection } from './booksSection/BooksSection';
+export { CommunitySection } from './community/CommunitySection';
+export { DifferenceSection } from './difference/DifferenceSection';
+export { DialsSection } from './dials/DialsSection';
+export { HeroSection } from './hero/HeroSection';
+export { HowItPlaysSection } from './hip/HowItPlaysSection';
+export { PlaytestInfoSection } from './playtest/PlaytestInfoSection';
