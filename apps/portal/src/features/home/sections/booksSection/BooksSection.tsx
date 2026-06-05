@@ -54,9 +54,9 @@ export function BooksSection() {
             coverSrc={book.coverSrc}
             spineSrc={book.spineSrc}
             showSpineLabel={book.showSpineLabel}
-            width="15.5rem"
-            height="20.5rem"
-            spineWidth="3.15rem"
+            width="17.5rem"
+            height="25.5rem"
+            spineWidth="5.15rem"
           />
         ))}
       </div>

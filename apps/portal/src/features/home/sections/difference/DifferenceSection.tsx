@@ -23,10 +23,13 @@ export function DifferenceSection() {
       <div className={styles.showcase}>
         <article className={`${styles.card} ${styles.featureCard}`}>
           <p className={styles.cardEyebrow}>At the table</p>
-          <h3>The system does not stop at pass or fail.</h3>
-          <p>
-            Every roll has a job: clarify what changes. Clean success, costly success, failure, and fate currency all keep the fiction moving instead of asking the table to wait for the next good roll.
-          </p>
+          <div className={styles.featureCardCopy}>
+            <h3>The system does not stop at pass or fail.</h3>
+            <p>
+              Every roll has a job: clarify what changes. Clean success, costly success, failure, and fate currency all keep the fiction moving instead of asking the table to wait
+              for the next good roll.
+            </p>
+          </div>
 
           <div className={styles.resultTrack} aria-label="Tapestry roll outcomes">
             {resultTrack.map((result: any) => (
@@ -41,9 +44,7 @@ export function DifferenceSection() {
         <article className={`${styles.card} ${styles.threadCard}`}>
           <p className={styles.cardEyebrow}>Why it matters</p>
           <h3>Failure becomes a resource instead of a dead end.</h3>
-          <p>
-            A bad roll should create pressure, not boredom. Threads give players a reason to stay bold even when the dice turn against them.
-          </p>
+          <p>A bad roll should create pressure, not boredom. Threads give players a reason to stay bold even when the dice turn against them.</p>
         </article>
       </div>
 
