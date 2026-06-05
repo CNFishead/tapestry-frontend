@@ -62,7 +62,7 @@
   z-index: 1;
   display: grid;
   gap: 1.4rem;
-  width: min(50%, calc(100% - 32px));
+  width: min(75%, calc(100% - 32px));
   height: auto;
   justify-self: center;
   align-self: center;
@@ -101,15 +101,14 @@
 
 .panel h1 {
   color: var(--paper);
-  font-size: clamp(1.5rem, 2.5vw, 3rem);
+  font-size: clamp(1.25rem, 2vw, 3rem);
   line-height: 0.95;
 }
 
-.lede {
-  max-width: 36rem;
+.lede { 
   margin: 0 auto;
   color: var(--contrast-2);
-  font-size: clamp(1.02rem, 2vw, 1.26rem);
+  font-size: clamp(1rem, 1.25vw, 5.26rem);
   line-height: 1.65;
 }
 

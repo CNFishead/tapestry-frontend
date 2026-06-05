@@ -27,6 +27,7 @@ export function HeroSection() {
               alt="Tapestry logo"
               width={400}
               height={400}
+              style={{ width: '75%', height: 'auto' }}
             />
           </div>
           <h1 id="home-title">
