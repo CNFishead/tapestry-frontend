@@ -9,7 +9,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
   gap: 1rem;
   align-items: end;
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
 }
 
 .header {
@@ -48,8 +48,7 @@
   background: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
-.noteLabel,
-.bookMeta {
+.noteLabel {
   margin: 0;
   color: var(--accent-2);
   font-size: 0.8rem;
@@ -65,66 +64,26 @@
 }
 
 .shelf {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.bookCard {
-  display: grid;
-  gap: 0.85rem;
-  padding: 1.45rem;
-  border: 1px solid color-mix(in srgb, var(--contrast-2) 12%, transparent);
-  border-radius: 1.7rem;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--base-2) 78%, transparent), color-mix(in srgb, var(--ink) 84%, transparent)),
-    color-mix(in srgb, var(--paper) 3%, transparent);
-  box-shadow: 0 1rem 2.2rem color-mix(in srgb, black 12%, transparent);
-}
-
-.cover {
-  position: relative;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 0.78;
-  border-radius: 1.3rem;
-  background:
-    linear-gradient(155deg, color-mix(in srgb, var(--accent-3) 48%, transparent), color-mix(in srgb, var(--base) 84%, black)),
-    linear-gradient(180deg, color-mix(in srgb, var(--paper) 4%, transparent), transparent);
-  overflow: hidden;
-}
-
-.coverSpine {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 16%;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-2) 72%, transparent), color-mix(in srgb, var(--accent) 64%, transparent));
-}
-
-.coverSigil {
-  position: relative;
-  z-index: 1;
-  color: var(--paper);
-  font-size: clamp(3rem, 6vw, 4.4rem);
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.bookCard h3 {
-  margin: 0;
-  color: var(--paper);
-  font-size: 1.16rem;
-}
-
-.bookCard p:last-child {
-  margin: 0;
-  color: var(--contrast-2);
-  line-height: 1.6;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: clamp(0.45rem, 1.2vw, 0.85rem);
+  align-items: flex-start;
+  justify-content: center;
+  min-block-size: calc(20.5rem + 9rem);
+  overflow: visible;
+  padding-block: 0.35rem 1.25rem;
 }
 
 @media (max-width: 900px) {
-  .headerRow,
-  .shelf {
+  .headerRow {
     grid-template-columns: 1fr;
+  }
+
+  .shelf {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-inline: 0.25rem;
+    scroll-snap-type: x proximity;
   }
 }

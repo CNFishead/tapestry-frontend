@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    "../../packages/ui/src/components/interactiveBook/InteractiveBook.tsx"
   ],
   "exclude": ["node_modules"]
 }
