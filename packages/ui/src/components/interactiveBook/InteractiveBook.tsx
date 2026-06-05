@@ -23,6 +23,7 @@ export function InteractiveBook({
   coverAlt,
   spineSrc,
   spineLabel,
+  showSpineLabel = true,
   eyebrow,
   description,
   expanded = false,
@@ -136,16 +137,18 @@ export function InteractiveBook({
             <span className={styles.spineDepth} />
             <span className={styles.spineEdgeLines} />
 
-            <motion.span
-              className={styles.spineText}
-              variants={{
-                collapsed: { opacity: 1, scale: 1 },
-                expanded: { opacity: 0, scale: 0.86 },
-              }}
-              transition={{ duration: 0.16 }}
-            >
-              {spineLabel ?? title}
-            </motion.span>
+            {showSpineLabel && (
+              <motion.span
+                className={styles.spineText}
+                variants={{
+                  collapsed: { opacity: 1, scale: 1 },
+                  expanded: { opacity: 0, scale: 0.86 },
+                }}
+                transition={{ duration: 0.16 }}
+              >
+                {spineLabel ?? title}
+              </motion.span>
+            )}
           </motion.div>
         </motion.div>
       </motion.div>

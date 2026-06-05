@@ -7,7 +7,8 @@ const books = [
     meta: 'Primary shelf slot',
     description: 'Placeholder space for the flagship book card, cover art, or CTA once storefront content is ready.',
     coverSrc: 'https://res.cloudinary.com/wulfdev/image/upload/v1780602174/ChatGPT_Image_Jan_11_2026_08_39_20_PM_-_Copy_mgah5q.png',
-    spineSrc: undefined,
+    spineSrc: 'https://res.cloudinary.com/wulfdev/image/upload/v1780683898/Players_Guide_Spine_uhgro4.png',
+    showSpineLabel: false,
   },
   {
     title: 'Rules and Rulings Guide',
@@ -52,6 +53,7 @@ export function BooksSection() {
             description={book.description}
             coverSrc={book.coverSrc}
             spineSrc={book.spineSrc}
+            showSpineLabel={book.showSpineLabel}
             width="15.5rem"
             height="20.5rem"
             spineWidth="3.15rem"
