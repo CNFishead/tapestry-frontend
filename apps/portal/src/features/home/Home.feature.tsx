@@ -19,7 +19,7 @@ export function HomeFeature() {
         <DialsSection />
         <BooksSection />
         <CommunitySection />
-        <PlaytestInfoSection />
+        {/* <PlaytestInfoSection /> */}
       </div>
     </main>
   );
