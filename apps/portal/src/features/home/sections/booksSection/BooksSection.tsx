@@ -68,6 +68,7 @@ export function BooksSection() {
                         width={bookDisplaySizes.width}
                         height={bookDisplaySizes.height}
                         spineWidth={bookDisplaySizes.spineWidth}
+                        showMetadata={false}
                       />
                     </div>
                   </article>
