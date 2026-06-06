@@ -24,6 +24,7 @@ export function InteractiveBook({
   spineSrc,
   spineLabel,
   showSpineLabel = true,
+  showMetadata = true,
   eyebrow,
   description,
   expanded = false,
@@ -152,20 +153,21 @@ export function InteractiveBook({
           </motion.div>
         </motion.div>
       </motion.div>
-
-      <motion.div
-        className={styles.copy}
-        variants={{
-          collapsed: { opacity: 0, y: 10 },
-          expanded: { opacity: 1, y: 0 },
-        }}
-        transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: 'easeOut' }}
-      >
-        {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
-        <h3>{title}</h3>
-        {description ? <p>{description}</p> : null}
-        {coverAlt ? <span className={styles.srOnly}>{coverAlt}</span> : null}
-      </motion.div>
+      {showMetadata && isOpen && (
+        <motion.div
+          className={styles.copy}
+          variants={{
+            collapsed: { opacity: 0, y: 10 },
+            expanded: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: 'easeOut' }}
+        > 
+          {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
+          <h3>{title}</h3>
+          {description ? <p>{description}</p> : null}
+          {coverAlt ? <span className={styles.srOnly}>{coverAlt}</span> : null}
+        </motion.div>
+      )}
     </motion.article>
   );
 }

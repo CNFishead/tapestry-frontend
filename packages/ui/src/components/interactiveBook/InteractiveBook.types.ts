@@ -7,6 +7,7 @@ export type InteractiveBookProps = {
   spineSrc?: string;
   spineLabel?: ReactNode;
   showSpineLabel?: boolean;
+  showMetadata?: boolean;
   eyebrow?: string;
   description?: string;
   expanded?: boolean;

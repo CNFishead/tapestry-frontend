@@ -207,11 +207,16 @@
   transform: rotate(180deg);
 }
 
-.copy {
-  inline-size: var(--book-width);
-  max-inline-size: var(--book-width);
-  overflow: hidden;
-  pointer-events: none;
+.copy { 
+  min-height: 6.65rem; 
+  padding: 0.85rem 0.95rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 13%, transparent);
+  border-radius: 1rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--paper) 7%, transparent), transparent),
+    color-mix(in srgb, var(--ink) 72%, transparent);
+  text-align: center;
+  box-shadow: 0 0.85rem 1.85rem rgba(0, 0, 0, 0.18);
 }
 
 .isOpen .copy {
