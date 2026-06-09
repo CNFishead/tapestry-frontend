@@ -19,8 +19,8 @@ export type PortalFooterGroup = {
 
 export const portalNavigation = [
   {
-    label: 'Shop',
-    href: portalRoutes.shop,
+    label: 'Home',
+    href: portalRoutes.home,
   },
   {
     label: 'Resources',
@@ -55,15 +55,15 @@ export const portalNavigation = [
 ] as const satisfies readonly PortalNavigationItem[];
 
 export const portalFooterGroups = [
-  {
-    title: 'Shop',
-    links: [
-      {
-        label: 'Shop',
-        href: portalRoutes.shop,
-      },
-    ],
-  },
+  // {
+  //   title: 'Shop',
+  //   links: [
+  //     {
+  //       label: 'Shop',
+  //       href: portalRoutes.shop,
+  //     },
+  //   ],
+  // },
   {
     title: 'Resources',
     links: [

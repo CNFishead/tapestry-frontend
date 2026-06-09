@@ -42,7 +42,7 @@ export const primaryCallToAction: SiteNavigationLink = {
 
 export const secondaryCallToAction: SiteNavigationLink = {
   label: 'Contact',
-  href: 'mailto:hello@tapestry-ttrpg.com',
+  href: 'mailto:marketing@tapestry-ttrpg.com',
   external: true,
 };
 

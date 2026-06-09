@@ -12,7 +12,9 @@ type NavbarProps = {
   onCloseMobileMenu: () => void;
 };
 
-const portalUtilityLinks = [portalCtas.cart, portalCtas.checkout];
+const portalUtilityLinks = [
+  // portalCtas.cart, portalCtas.checkout
+] as any[];
 
 function isPortalNavigationGroup(item: PortalNavigationItem): item is PortalNavigationGroup {
   return 'items' in item;
@@ -48,7 +50,7 @@ export function Navbar({ isMobileMenuOpen, onOpenMobileMenu, onCloseMobileMenu }
 
           <div className={styles.actions}>
             <div className={styles.utilityLinks} aria-label="Utility links">
-              {portalUtilityLinks.map((link) => (
+              {portalUtilityLinks?.map((link) => (
                 <Link key={link.href} href={link.href} className={styles.utilityLink}>
                   {link.label}
                 </Link>

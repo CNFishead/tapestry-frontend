@@ -88,8 +88,12 @@ export function CommunitySection() {
 
         <div className={styles.pulsePanel} aria-labelledby="community-pulse-title">
           <div className={styles.pulseHeader}>
-            <p className={styles.panelLabel}>Build pulse</p>
-            <h3 id="community-pulse-title">A lightweight update rail now, an API-backed devlog later.</h3>
+            <p className={styles.panelLabel}>
+              The Loom Pulse
+            </p>
+            <h3 id="community-pulse-title">
+              What's being woven right now
+            </h3>
           </div>
 
           <div className={styles.pulseList}>
