@@ -20,8 +20,8 @@
   --color-surface: rgba(11, 20, 40, 0.78);
   --color-foreground: #f2f7ff;
   --color-muted: #9db1cc;
-  --color-accent: #8fffd8;
-  --color-accent-strong: #7bafff;
+  --color-accent: var(--accent-2);
+  --color-accent-strong: var(--accent-3);
 
   /* ── ui-* token overrides (dark teal theme) ───── */
   --ui-surface: rgba(11, 20, 40, 0.78);
@@ -30,8 +30,8 @@
   --ui-border-strong: rgba(143, 255, 216, 0.2);
   --ui-text: #f2f7ff;
   --ui-text-muted: #9db1cc;
-  --ui-accent: #8fffd8;
-  --ui-accent-2: #7bafff;
+  --ui-accent: var(--accent-2);
+  --ui-accent-2: var(--accent-3);
   --ui-gold: #faad14;
   --ui-base: #07101f;
   --ui-base-2: #0c1a30;

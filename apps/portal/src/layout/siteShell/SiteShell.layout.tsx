@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { Footer } from '@/layout/footer/Footer.layout';
 import { Navbar } from '@/layout/navbar/Navbar.layout';
 import styles from './SiteShell.module.scss';
+import NextTopLoader from 'nextjs-toploader';
 
 type SiteShellProps = {
   children: ReactNode;
@@ -38,7 +39,10 @@ export function SiteShell({ children }: SiteShellProps) {
   return (
     <div className={styles.shell}>
       <Navbar isMobileMenuOpen={isMobileMenuOpen} onOpenMobileMenu={() => setIsMobileMenuOpen(true)} onCloseMobileMenu={() => setIsMobileMenuOpen(false)} />
-      <div className={styles.content}>{children}</div>
+      <div className={styles.content}>
+        <NextTopLoader color="var(--ui-accent)" height={3} showSpinner={false} easing="ease" speed={200} shadow="0 0 10px var(--ui-accent),0 0 5px var(--ui-accent)" />
+        {children}
+      </div>
       <Footer />
     </div>
   );
