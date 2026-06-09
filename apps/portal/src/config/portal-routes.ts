@@ -5,10 +5,10 @@ export const portalRoutes = {
   checkout: '/checkout',
   getPlayersGuide: '/get-players-guide',
   resources: {
-    players: '/resources-2/tapestry-players-guide',
-    storyweavers: '/resources-2/tapestry-storyweavers',
-    adversaries: '/resources-2/tapestry-adversaries',
-    unwoven: '/unwoven',
+    players: '/resources/tapestry-players-guide',
+    storyweavers: '/resources/tapestry-storyweavers',
+    adversaries: '/resources/tapestry-adversaries',
+    unwoven: '/resources/tapestry-unwoven',
   },
   settings: {
     wovenRealms: '/settings/woven-realms',
