@@ -214,6 +214,9 @@ export default function ProductEditor({ id }: ProductEditorProps) {
         </div>
 
         <div className={styles.headerActions}>
+          <Button variant="ghost" tone="neutral" onClick={() => router.push('/resources')}>
+            Manage Resources
+          </Button>
           <Button variant="ghost" tone="neutral" onClick={() => router.push('/products')}>
             Back to Store
           </Button>
@@ -718,7 +721,7 @@ function FulfillmentTab({
               </div>
 
               {resourceQueryState.isError ? (
-                <div className={styles.notice}>Library resources failed to load from `/api/v1/library/resources`. Once that route is mounted, this selector will populate automatically.</div>
+                <div className={styles.notice}>Library resources failed to load from `/api/v1/library/resources`. Check the API mount or auth context before saving grants.</div>
               ) : null}
 
               {resourceQueryState.isLoading ? <div className={styles.notice}>Loading library resources...</div> : null}
@@ -769,7 +772,7 @@ function FulfillmentTab({
                               };
                               form.setValue('grants', nextGrants, { touch: true, validate: true });
                             }}
-                            helpText="Loaded from the future `/api/v1/library/resources` mount."
+                            helpText="Loaded from `/api/v1/library/resources`."
                             options={[{ label: 'Select a resource...', value: '' }, ...rowOptions]}
                             disabled={disabled || resourceQueryState.isLoading}
                           />
