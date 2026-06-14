@@ -2,26 +2,17 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Button, Card, CardBody, Form, Loader, Tabs, deriveApiErrorMessage, useAlert, useForm, type SelectOption } from '@tapestry/ui';
+import type { CommerceProduct, CreateProductInput } from '@tapestry/types';
 import {
-  Button,
-  Card,
-  CardBody,
-  Form,
-  Loader,
-  Tabs,
-  deriveApiErrorMessage,
-  useAlert,
-  useForm,
-  type SelectOption,
-} from '@tapestry/ui';
-import type { CreateProductInput } from '@tapestry/types';
-import { createLibraryResourceOptionLabel, useCreateStoreProduct, useDeleteStoreProduct, useLibraryResources, useStoreProduct, useUpdateStoreProduct } from '../../_hooks/useStoreProducts';
-import {
-  createDefaultProductFormValues,
-  productFormValidators,
-  toProductFormValues,
-  toProductPayload,
-} from '../../store.helpers';
+  createLibraryResourceOptionLabel,
+  useCreateStoreProduct,
+  useDeleteStoreProduct,
+  useLibraryResources,
+  useStoreProduct,
+  useUpdateStoreProduct,
+} from '../../_hooks/useStoreProducts';
+import { createDefaultProductFormValues, productFormValidators, toProductFormValues, toProductPayload } from '../../store.helpers';
 import type { ProductEditorFormValues } from '../../store.types';
 import DeleteProductModal from './modals/DeleteProductModal.component';
 import styles from './ProductEditor.module.scss';
@@ -29,13 +20,29 @@ import { useProductEditorTabs } from './productEditor.tabs';
 
 type ProductEditorProps = {
   id?: string;
+  onCreated?: (id: string, label: string) => void;
+  onDeleted?: () => void;
+  onCancel?: () => void;
+  onDirtyChange?: (isDirty: boolean) => void;
+  onLabelChange?: (label: string) => void;
 };
 
-export default function ProductEditor({ id }: ProductEditorProps) {
+function deriveProductLabel(values: Pick<ProductEditorFormValues, 'title' | 'slug' | 'key'>) {
+  return values.title.trim() || values.slug.trim() || values.key.trim() || 'Product';
+}
+
+function deriveProductLabelFromRecord(product: Pick<CommerceProduct, 'title' | 'slug' | 'key'>) {
+  return product.title?.trim() || product.slug?.trim() || product.key?.trim() || 'Product';
+}
+
+export default function ProductEditor({ id, onCreated, onDeleted, onCancel, onDirtyChange, onLabelChange }: ProductEditorProps) {
   const router = useRouter();
   const { addAlert } = useAlert();
   const isNew = !id;
   const loadedSnapshotRef = useRef<string | null>(null);
+  const onDirtyChangeRef = useRef(onDirtyChange);
+  const onLabelChangeRef = useRef(onLabelChange);
+  const hostedInWorkspace = Boolean(onCancel || onCreated || onDeleted || onDirtyChange || onLabelChange);
 
   const productQuery = useStoreProduct(id);
   const libraryResourcesQuery = useLibraryResources({
@@ -58,12 +65,17 @@ export default function ProductEditor({ id }: ProductEditorProps) {
       try {
         if (isNew) {
           const result = await createProduct.mutateAsync(payload);
+          const label = deriveProductLabel(values);
           addAlert({
             type: 'success',
             message: 'Product created',
             description: 'The store product has been created successfully.',
           });
-          router.push(`/products/${result.payload}`);
+          if (onCreated) {
+            onCreated(result.payload, label);
+          } else {
+            router.push(`/products/${result.payload}`);
+          }
           return;
         }
 
@@ -74,6 +86,7 @@ export default function ProductEditor({ id }: ProductEditorProps) {
 
         api.replaceValues(toProductFormValues(result.payload));
         loadedSnapshotRef.current = `${result.payload._id}:${result.payload.updatedAt}`;
+        onLabelChange?.(deriveProductLabelFromRecord(result.payload));
 
         addAlert({
           type: 'success',
@@ -91,6 +104,18 @@ export default function ProductEditor({ id }: ProductEditorProps) {
   });
 
   useEffect(() => {
+    onDirtyChangeRef.current = onDirtyChange;
+  }, [onDirtyChange]);
+
+  useEffect(() => {
+    onLabelChangeRef.current = onLabelChange;
+  }, [onLabelChange]);
+
+  useEffect(() => {
+    onDirtyChangeRef.current?.(form.isDirty);
+  }, [form.isDirty]);
+
+  useEffect(() => {
     const product = productQuery.data?.payload;
     if (!product) return;
 
@@ -99,6 +124,7 @@ export default function ProductEditor({ id }: ProductEditorProps) {
 
     form.replaceValues(toProductFormValues(product));
     loadedSnapshotRef.current = nextSnapshot;
+    onLabelChangeRef.current?.(deriveProductLabelFromRecord(product));
   }, [form, productQuery.data?.payload]);
 
   const disabled = createProduct.isPending || updateProduct.isPending || deleteProduct.isPending;
@@ -131,7 +157,11 @@ export default function ProductEditor({ id }: ProductEditorProps) {
         message: 'Product deleted',
         description: 'The store product has been deleted successfully.',
       });
-      router.push('/products');
+      if (onDeleted) {
+        onDeleted();
+      } else {
+        router.push('/products');
+      }
     } catch (error) {
       addAlert({
         type: 'error',
@@ -161,8 +191,8 @@ export default function ProductEditor({ id }: ProductEditorProps) {
             <div className={styles.stateTitle}>Product not found</div>
             <p className={styles.stateText}>This product could not be loaded. It may have been removed or the id is invalid.</p>
             <div className={styles.stateActions}>
-              <Button variant="outline" tone="neutral" onClick={() => router.push('/products')}>
-                Back to Store
+              <Button variant="outline" tone="neutral" onClick={() => (onCancel ? onCancel() : router.push('/products'))}>
+                {hostedInWorkspace ? 'Close Tab' : 'Back to Store'}
               </Button>
             </div>
           </CardBody>
@@ -185,11 +215,13 @@ export default function ProductEditor({ id }: ProductEditorProps) {
         </div>
 
         <div className={styles.headerActions}>
-          <Button variant="ghost" tone="neutral" onClick={() => router.push('/resources')}>
-            Manage Resources
-          </Button>
-          <Button variant="ghost" tone="neutral" onClick={() => router.push('/products')}>
-            Back to Store
+          {hostedInWorkspace ? null : (
+            <Button variant="ghost" tone="neutral" onClick={() => router.push('/resources')}>
+              Manage Resources
+            </Button>
+          )}
+          <Button variant="ghost" tone="neutral" onClick={() => (onCancel ? onCancel() : router.push('/products'))}>
+            {hostedInWorkspace ? 'Close Tab' : 'Back to Store'}
           </Button>
         </div>
       </div>
@@ -217,13 +249,7 @@ export default function ProductEditor({ id }: ProductEditorProps) {
         </div>
       </Form>
 
-      <DeleteProductModal
-        open={deleteModalOpen}
-        productLabel={productLabel}
-        loading={deleteProduct.isPending}
-        onConfirm={handleDelete}
-        onClose={() => setDeleteModalOpen(false)}
-      />
+      <DeleteProductModal open={deleteModalOpen} productLabel={productLabel} loading={deleteProduct.isPending} onConfirm={handleDelete} onClose={() => setDeleteModalOpen(false)} />
     </div>
   );
 }

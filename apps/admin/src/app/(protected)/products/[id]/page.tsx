@@ -1,5 +1,5 @@
 import { createAdminPageMetadata } from '@/app/pageMetadata';
-import ProductEditor from '@/features/store/_components/productEditor/ProductEditor.component';
+import ProductsWorkspace from '@/features/store/_components/productsWorkspace/ProductsWorkspace.component';
 
 export const metadata = createAdminPageMetadata({
   title: 'Edit Product',
@@ -12,5 +12,5 @@ type PageProps = {
 
 export default async function ProductDetailPage({ params }: PageProps) {
   const { id } = await params;
-  return <ProductEditor id={id} />;
+  return <ProductsWorkspace initialProductId={id} />;
 }

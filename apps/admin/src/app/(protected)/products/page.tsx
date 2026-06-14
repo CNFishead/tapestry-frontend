@@ -1,5 +1,5 @@
 import { createAdminPageMetadata } from '@/app/pageMetadata';
-import StoreList from '@/features/store/_components/storeList/StoreList.component';
+import ProductsWorkspace from '@/features/store/_components/productsWorkspace/ProductsWorkspace.component';
 
 export const metadata = createAdminPageMetadata({
   title: 'Store',
@@ -7,5 +7,5 @@ export const metadata = createAdminPageMetadata({
 });
 
 export default function ProductsPage() {
-  return <StoreList />;
+  return <ProductsWorkspace />;
 }

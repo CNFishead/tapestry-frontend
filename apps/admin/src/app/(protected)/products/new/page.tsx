@@ -1,5 +1,5 @@
 import { createAdminPageMetadata } from '@/app/pageMetadata';
-import ProductEditor from '@/features/store/_components/productEditor/ProductEditor.component';
+import ProductsWorkspace from '@/features/store/_components/productsWorkspace/ProductsWorkspace.component';
 
 export const metadata = createAdminPageMetadata({
   title: 'New Product',
@@ -7,5 +7,5 @@ export const metadata = createAdminPageMetadata({
 });
 
 export default function NewProductPage() {
-  return <ProductEditor />;
+  return <ProductsWorkspace initialNew />;
 }

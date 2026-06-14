@@ -10,7 +10,16 @@ import { buildStoreFilterOptions, formatDate, formatPriceLabel, getGrantSummary,
 import type { StoreStatusFilter, StoreVisibilityFilter } from '../../store.types';
 import styles from './StoreList.module.scss';
 
-export default function StoreList() {
+type StoreListProps = {
+  onRowClick?: (id: string, label: string) => void;
+  onNewProduct?: () => void;
+};
+
+function getProductLabel(product: CommerceProduct) {
+  return product.title || product.slug || product.key || 'Product';
+}
+
+export default function StoreList({ onRowClick, onNewProduct }: StoreListProps) {
   const router = useRouter();
   const deleteProduct = useDeleteStoreProduct();
 
@@ -129,7 +138,7 @@ export default function StoreList() {
           <Button variant="ghost" tone="neutral" onClick={() => router.push('/resources')}>
             Manage Resources
           </Button>
-          <Button variant="outline" tone="neutral" onClick={() => router.push('/products/new')}>
+          <Button variant="outline" tone="neutral" onClick={() => (onNewProduct ? onNewProduct() : router.push('/products/new'))}>
             New Product
           </Button>
         </div>
@@ -205,7 +214,7 @@ export default function StoreList() {
             rowKey="_id"
             loading={productsQuery.isLoading || productsQuery.isFetching}
             loadingComponent={<Loader caption="Loading products..." />}
-            onRowClick={(row) => router.push(`/products/${row._id}`)}
+            onRowClick={(row) => (onRowClick ? onRowClick(row._id, getProductLabel(row)) : router.push(`/products/${row._id}`))}
             rowActions={rowActions}
             emptyTitle="No products found"
             emptyMessage="Try adjusting your filters or create a new product."
