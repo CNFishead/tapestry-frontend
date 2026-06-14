@@ -43,6 +43,14 @@ export function createEmptyGrant(): CommerceProductGrant {
   };
 }
 
+function hasMeaningfulGrantInput(grant: CommerceProductGrant) {
+  return grant.resourceId.trim().length > 0 || grant.permissions.length > 0;
+}
+
+function getConfiguredGrants(grants: CommerceProductGrant[]) {
+  return grants.filter(hasMeaningfulGrantInput);
+}
+
 export function createDefaultProductFormValues(): ProductEditorFormValues {
   return {
     key: '',
@@ -138,7 +146,7 @@ export function toProductPayload(values: ProductEditorFormValues): CreateProduct
   const requiresShipping = fulfillmentKind === 'digital' ? false : values.requiresShipping;
   const grants = fulfillmentKind === 'physical'
     ? []
-    : values.grants
+    : getConfiguredGrants(values.grants)
         .map((grant) => ({
           type: 'resource' as const,
           resourceId: grant.resourceId.trim(),
@@ -228,7 +236,14 @@ export function getGrantSummary(product: CommerceProduct) {
 
 export const productFormValidators: FormValidators<ProductEditorFormValues> = {
   key: (value) => (slugifyValue(String(value || '')) ? undefined : 'Key is required'),
-  slug: (value) => (slugifyValue(String(value || '')) ? undefined : 'Slug is required'),
+  slug: (value) => {
+    const rawValue = String(value || '').trim();
+    if (!rawValue) {
+      return undefined;
+    }
+
+    return slugifyValue(rawValue) ? undefined : 'Slug must resolve to a valid path segment';
+  },
   title: (value) => (String(value || '').trim() ? undefined : 'Title is required'),
   amountCents: (value, values) => {
     const numericValue = Number(value);
@@ -267,27 +282,28 @@ export const productFormValidators: FormValidators<ProductEditorFormValues> = {
   },
   grants: (value, values) => {
     const grants = value ?? [];
+    const configuredGrants = getConfiguredGrants(grants);
 
-    if (values.fulfillmentKind === 'physical' && grants.length > 0) {
+    if (values.fulfillmentKind === 'physical' && configuredGrants.length > 0) {
       return 'Physical products cannot include digital resource grants';
     }
 
-    if (values.pricingType === 'free' && values.fulfillmentKind !== 'physical' && grants.length === 0) {
+    if (values.status !== 'draft' && values.pricingType === 'free' && values.fulfillmentKind !== 'physical' && configuredGrants.length === 0) {
       return 'Free products need at least one resource grant';
     }
 
-    const hasMissingResource = grants.some((grant) => !grant.resourceId.trim());
+    const hasMissingResource = configuredGrants.some((grant) => !grant.resourceId.trim());
     if (hasMissingResource) {
       return 'Each grant needs a library resource';
     }
 
-    const hasMissingPermissions = grants.some((grant) => grant.permissions.length === 0);
+    const hasMissingPermissions = configuredGrants.some((grant) => grant.permissions.length === 0);
     if (hasMissingPermissions) {
       return 'Each grant needs at least one permission';
     }
 
-    const uniqueIds = new Set(grants.map((grant) => grant.resourceId.trim()));
-    if (uniqueIds.size !== grants.length) {
+    const uniqueIds = new Set(configuredGrants.map((grant) => grant.resourceId.trim()));
+    if (uniqueIds.size !== configuredGrants.length) {
       return 'Each library resource should only be granted once per product';
     }
 

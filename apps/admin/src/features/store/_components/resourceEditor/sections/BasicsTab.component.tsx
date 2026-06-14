@@ -11,17 +11,23 @@ import {
   TextField,
   type SelectOption,
 } from '@tapestry/ui';
-import { slugifyValue, STORE_STATUS_OPTIONS, STORE_VISIBILITY_OPTIONS } from '../../../store.helpers';
-import type { ProductEditorTabProps } from '../productEditor.types';
-import styles from '../ProductEditor.module.scss';
+import {
+  RESOURCE_ACCESS_POLICY_OPTIONS,
+  RESOURCE_FORMAT_OPTIONS,
+  RESOURCE_KIND_OPTIONS,
+  RESOURCE_STATUS_OPTIONS,
+  slugifyValue,
+} from '../../../resource.helpers';
+import type { ResourceEditorTabProps } from '../resourceEditor.types';
+import styles from '../ResourceEditor.module.scss';
 
-export default function BasicsTab({ form, disabled }: ProductEditorTabProps) {
+export default function BasicsTab({ form, disabled }: ResourceEditorTabProps) {
   return (
     <Card>
       <CardHeader className={styles.sectionHeader}>
         <div>
-          <h2 className={styles.sectionTitle}>Identity & Visibility</h2>
-          <p className={styles.sectionSubtitle}>Define how this product is identified in the catalog and how visible it should be to players.</p>
+          <h2 className={styles.sectionTitle}>Identity & Access</h2>
+          <p className={styles.sectionSubtitle}>Describe the library resource itself and how it should be exposed to players.</p>
         </div>
         <Button
           type="button"
@@ -71,7 +77,7 @@ export default function BasicsTab({ form, disabled }: ProductEditorTabProps) {
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 error={field.shouldShowError ? field.error : undefined}
-                helpText="Slug-like identifier used for stable product keys."
+                helpText="Slug-like identifier used across the library and store."
                 disabled={disabled}
               />
             )}
@@ -86,7 +92,7 @@ export default function BasicsTab({ form, disabled }: ProductEditorTabProps) {
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 error={field.shouldShowError ? field.error : undefined}
-                helpText="Optional. Leave blank to let the server derive it from the title."
+                helpText="Preferred public-facing path segment."
                 disabled={disabled}
               />
             )}
@@ -106,6 +112,37 @@ export default function BasicsTab({ form, disabled }: ProductEditorTabProps) {
         </FormField>
 
         <FormGroup>
+          <FormField name="kind">
+            {(field) => (
+              <SelectField
+                floatingLabel
+                id={field.id}
+                label="Kind"
+                value={field.value as string}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                options={RESOURCE_KIND_OPTIONS as unknown as SelectOption[]}
+                disabled={disabled}
+              />
+            )}
+          </FormField>
+          <FormField name="format">
+            {(field) => (
+              <SelectField
+                floatingLabel
+                id={field.id}
+                label="Format"
+                value={field.value as string}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                options={RESOURCE_FORMAT_OPTIONS as unknown as SelectOption[]}
+                disabled={disabled}
+              />
+            )}
+          </FormField>
+        </FormGroup>
+
+        <FormGroup>
           <FormField name="status">
             {(field) => (
               <SelectField
@@ -115,42 +152,61 @@ export default function BasicsTab({ form, disabled }: ProductEditorTabProps) {
                 value={field.value as string}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
-                error={field.shouldShowError ? field.error : undefined}
-                options={STORE_STATUS_OPTIONS as unknown as SelectOption[]}
+                options={RESOURCE_STATUS_OPTIONS as unknown as SelectOption[]}
                 disabled={disabled}
               />
             )}
           </FormField>
-          <FormField name="visibility">
+          <FormField name="accessPolicy">
             {(field) => (
               <SelectField
                 floatingLabel
                 id={field.id}
-                label="Visibility"
+                label="Access Policy"
                 value={field.value as string}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
-                error={field.shouldShowError ? field.error : undefined}
-                options={STORE_VISIBILITY_OPTIONS as unknown as SelectOption[]}
+                options={RESOURCE_ACCESS_POLICY_OPTIONS as unknown as SelectOption[]}
                 disabled={disabled}
               />
             )}
           </FormField>
         </FormGroup>
 
-        <FormField name="tags">
+        <FormGroup>
+          <FormField name="tags">
+            {(field) => (
+              <TagInputField
+                floatingLabel
+                id={field.id}
+                label="Tags"
+                value={field.value as string[]}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                disabled={disabled}
+                placeholder="Type a tag and press comma or enter..."
+              />
+            )}
+          </FormField>
+          <FormField name="authors">
+            {(field) => (
+              <TagInputField
+                floatingLabel
+                id={field.id}
+                label="Authors"
+                value={field.value as string[]}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                disabled={disabled}
+                placeholder="Type an author and press comma or enter..."
+              />
+            )}
+          </FormField>
+        </FormGroup>
+
+        <FormField name="publishedAt">
           {(field) => (
-            <TagInputField
-              floatingLabel
-              id={field.id}
-              label="Tags"
-              value={field.value as string[]}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              error={field.shouldShowError ? field.error : undefined}
-              disabled={disabled}
-              placeholder="Type a tag and press comma or enter..."
-            />
+            <TextField floatingLabel id={field.id} label="Published Date" type="date" value={field.value as string} onChange={field.onChange} onBlur={field.onBlur} disabled={disabled} />
           )}
         </FormField>
       </CardBody>
