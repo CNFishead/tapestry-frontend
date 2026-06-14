@@ -18,6 +18,7 @@ import {
   TextAreaField,
   TextField,
   Upload,
+  deriveApiErrorMessage,
   useAlert,
   useForm,
   type SelectOption,
@@ -45,21 +46,6 @@ import styles from './ResourceEditor.module.scss';
 type ResourceEditorProps = {
   id?: string;
 };
-
-function deriveApiErrorMessage(error: unknown, fallback: string) {
-  if (typeof error === 'object' && error && 'response' in error) {
-    const response = (error as { response?: { data?: { message?: string } } }).response;
-    if (response?.data?.message) {
-      return response.data.message;
-    }
-  }
-
-  if (error instanceof Error && error.message) {
-    return error.message;
-  }
-
-  return fallback;
-}
 
 function createSyntheticUploadFile(values: ResourceEditorFormValues): UploadFile[] {
   if (!values.releaseAssetKey.trim()) {
