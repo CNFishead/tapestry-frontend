@@ -1,5 +1,5 @@
 import { createAdminPageMetadata } from '@/app/pageMetadata';
-import ResourceList from '@/features/store/_components/resourceList/ResourceList.component';
+import ResourcesWorkspace from '@/features/store/_components/resourcesWorkspace/ResourcesWorkspace.component';
 
 export const metadata = createAdminPageMetadata({
   title: 'Resources',
@@ -7,5 +7,5 @@ export const metadata = createAdminPageMetadata({
 });
 
 export default function ResourcesPage() {
-  return <ResourceList />;
+  return <ResourcesWorkspace />;
 }

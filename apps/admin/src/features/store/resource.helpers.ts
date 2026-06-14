@@ -216,21 +216,20 @@ function toDateInputValue(value?: string) {
 
 export const resourceFormValidators: FormValidators<ResourceEditorFormValues> = {
   key: (value) => (slugifyValue(String(value || '')) ? undefined : 'Key is required'),
-  slug: (value) => (slugifyValue(String(value || '')) ? undefined : 'Slug is required'),
   title: (value) => (String(value || '').trim() ? undefined : 'Title is required'),
-  releaseVersion: (value) => (String(value || '').trim() ? undefined : 'Release version is required'),
-  releaseAssetKey: (value) => (String(value || '').trim() ? undefined : 'Upload the canonical resource file before saving'),
-  releaseMimeType: (value) => (String(value || '').trim() ? undefined : 'Uploaded file MIME type is required'),
-  releaseSizeBytes: (value) => {
-    if (value === undefined || value === null) {
-      return 'Uploaded file size metadata is required';
-    }
+  // releaseVersion: (value) => (String(value || '').trim() ? undefined : 'Release version is required'),
+  // releaseAssetKey: (value) => (String(value || '').trim() ? undefined : 'Upload the canonical resource file before saving'),
+  // releaseMimeType: (value) => (String(value || '').trim() ? undefined : 'Uploaded file MIME type is required'),
+  // releaseSizeBytes: (value) => {
+  //   if (value === undefined || value === null) {
+  //     return 'Uploaded file size metadata is required';
+  //   }
 
-    const numericValue = Number(value);
-    if (!Number.isInteger(numericValue) || numericValue <= 0) {
-      return 'Uploaded file size must be a positive byte count';
-    }
+  //   const numericValue = Number(value);
+  //   if (!Number.isInteger(numericValue) || numericValue <= 0) {
+  //     return 'Uploaded file size must be a positive byte count';
+  //   }
 
-    return undefined;
-  },
+  //   return undefined;
+  // },
 };

@@ -1,5 +1,5 @@
 import { createAdminPageMetadata } from '@/app/pageMetadata';
-import ResourceEditor from '@/features/store/_components/resourceEditor/ResourceEditor.component';
+import ResourcesWorkspace from '@/features/store/_components/resourcesWorkspace/ResourcesWorkspace.component';
 
 export const metadata = createAdminPageMetadata({
   title: 'New Resource',
@@ -7,5 +7,5 @@ export const metadata = createAdminPageMetadata({
 });
 
 export default function NewResourcePage() {
-  return <ResourceEditor />;
+  return <ResourcesWorkspace initialNew />;
 }

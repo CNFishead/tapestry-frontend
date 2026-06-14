@@ -10,7 +10,16 @@ import { buildResourceFilterOptions, formatDate, RESOURCE_PAGE_SIZE } from '../.
 import type { ResourceAccessPolicyFilter, ResourceStatusFilter } from '../../resource.types';
 import styles from './ResourceList.module.scss';
 
-export default function ResourceList() {
+type ResourceListProps = {
+  onRowClick?: (id: string, label: string) => void;
+  onNewResource?: () => void;
+};
+
+function getResourceLabel(resource: LibraryResource) {
+  return resource.title || resource.slug || resource.key || 'Resource';
+}
+
+export default function ResourceList({ onRowClick, onNewResource }: ResourceListProps) {
   const router = useRouter();
   const deleteResource = useDeleteStoreResource();
 
@@ -124,7 +133,7 @@ export default function ResourceList() {
           <Button variant="ghost" tone="neutral" onClick={() => router.push('/products')}>
             Back to Products
           </Button>
-          <Button variant="outline" tone="neutral" onClick={() => router.push('/resources/new')}>
+          <Button variant="outline" tone="neutral" onClick={() => (onNewResource ? onNewResource() : router.push('/resources/new'))}>
             New Resource
           </Button>
         </div>
@@ -199,7 +208,7 @@ export default function ResourceList() {
             rowKey="_id"
             loading={resourcesQuery.isLoading || resourcesQuery.isFetching}
             loadingComponent={<Loader caption="Loading resources..." />}
-            onRowClick={(row) => router.push(`/resources/${row._id}`)}
+            onRowClick={(row) => (onRowClick ? onRowClick(row._id, getResourceLabel(row)) : router.push(`/resources/${row._id}`))}
             rowActions={rowActions}
             emptyTitle="No resources found"
             emptyMessage="Create a canonical library resource so the store has something to grant later."

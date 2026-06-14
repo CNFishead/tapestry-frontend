@@ -2,13 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import type { LibraryResource } from '@tapestry/types';
 import { Button, Card, CardBody, Form, Loader, Tabs, deriveApiErrorMessage, useAlert, useForm } from '@tapestry/ui';
-import {
-  createDefaultResourceFormValues,
-  resourceFormValidators,
-  toResourceFormValues,
-  toResourcePayload,
-} from '../../resource.helpers';
+import { createDefaultResourceFormValues, resourceFormValidators, toResourceFormValues, toResourcePayload } from '../../resource.helpers';
 import type { ResourceEditorFormValues } from '../../resource.types';
 import { useCreateStoreResource, useDeleteStoreResource, useStoreResource, useUpdateStoreResource, useUploadStoreResourceFile } from '../../_hooks/useStoreResources';
 import DeleteResourceModal from './modals/DeleteResourceModal.component';
@@ -18,13 +14,29 @@ import { useResourceEditorTabs } from './resourceEditor.tabs';
 
 type ResourceEditorProps = {
   id?: string;
+  onCreated?: (id: string, label: string) => void;
+  onDeleted?: () => void;
+  onCancel?: () => void;
+  onDirtyChange?: (isDirty: boolean) => void;
+  onLabelChange?: (label: string) => void;
 };
 
-export default function ResourceEditor({ id }: ResourceEditorProps) {
+function deriveResourceLabel(values: Pick<ResourceEditorFormValues, 'title' | 'slug' | 'key'>) {
+  return values.title.trim() || values.slug.trim() || values.key.trim() || 'Resource';
+}
+
+function deriveResourceLabelFromRecord(resource: Pick<LibraryResource, 'title' | 'slug' | 'key'>) {
+  return resource.title?.trim() || resource.slug?.trim() || resource.key?.trim() || 'Resource';
+}
+
+export default function ResourceEditor({ id, onCreated, onDeleted, onCancel, onDirtyChange, onLabelChange }: ResourceEditorProps) {
   const router = useRouter();
   const { addAlert } = useAlert();
   const isNew = !id;
   const loadedSnapshotRef = useRef<string | null>(null);
+  const onDirtyChangeRef = useRef(onDirtyChange);
+  const onLabelChangeRef = useRef(onLabelChange);
+  const hostedInWorkspace = Boolean(onCancel || onCreated || onDeleted || onDirtyChange || onLabelChange);
 
   const resourceQuery = useStoreResource(id);
   const createResource = useCreateStoreResource();
@@ -43,12 +55,17 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
       try {
         if (isNew) {
           const result = await createResource.mutateAsync(payload);
+          const label = deriveResourceLabel(values);
           addAlert({
             type: 'success',
             message: 'Resource created',
             description: 'The canonical library resource has been created successfully.',
           });
-          router.push(`/resources/${result.payload}`);
+          if (onCreated) {
+            onCreated(result.payload, label);
+          } else {
+            router.push(`/resources/${result.payload}`);
+          }
           return;
         }
 
@@ -59,6 +76,7 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
 
         api.replaceValues(toResourceFormValues(result.payload));
         loadedSnapshotRef.current = `${result.payload._id}:${result.payload.updatedAt}`;
+        onLabelChange?.(deriveResourceLabelFromRecord(result.payload));
 
         addAlert({
           type: 'success',
@@ -75,21 +93,24 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
     },
   });
 
-  const {
-    beforeUpload,
-    fileList,
-    handleFileChange,
-    handleFileRemove,
-    isUploading,
-    resetForNewResource,
-    syncWithValues,
-    uploadPreviewUrl,
-    uploadResourceType,
-  } = useResourceReleaseUpload({
-    addAlert,
-    form,
-    uploadResourceFile,
-  });
+  useEffect(() => {
+    onDirtyChangeRef.current = onDirtyChange;
+  }, [onDirtyChange]);
+
+  useEffect(() => {
+    onLabelChangeRef.current = onLabelChange;
+  }, [onLabelChange]);
+
+  useEffect(() => {
+    onDirtyChangeRef.current?.(form.isDirty);
+  }, [form.isDirty]);
+
+  const { beforeUpload, fileList, handleFileChange, handleFileRemove, isUploading, resetForNewResource, syncWithValues, uploadPreviewUrl, uploadResourceType } =
+    useResourceReleaseUpload({
+      addAlert,
+      form,
+      uploadResourceFile,
+    });
 
   const resetToCurrentSnapshot = useCallback(() => {
     if (isNew) {
@@ -108,6 +129,7 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
     const nextValues = toResourceFormValues(resource);
     form.replaceValues(nextValues);
     syncWithValues(nextValues);
+    onLabelChangeRef.current?.(deriveResourceLabel(nextValues));
   }, [form, isNew, resetForNewResource, resourceQuery.data?.payload, syncWithValues]);
 
   useEffect(() => {
@@ -121,6 +143,7 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
     form.replaceValues(nextValues);
     syncWithValues(nextValues);
     loadedSnapshotRef.current = nextSnapshot;
+    onLabelChangeRef.current?.(deriveResourceLabelFromRecord(resource));
   }, [form, resourceQuery.data?.payload, syncWithValues]);
 
   const disabled = createResource.isPending || updateResource.isPending || deleteResource.isPending;
@@ -148,7 +171,11 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
         message: 'Resource deleted',
         description: 'The library resource has been deleted successfully.',
       });
-      router.push('/resources');
+      if (onDeleted) {
+        onDeleted();
+      } else {
+        router.push('/resources');
+      }
     } catch (error) {
       addAlert({
         type: 'error',
@@ -156,7 +183,7 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
         description: deriveApiErrorMessage(error, 'Failed to delete resource.'),
       });
     }
-  }, [addAlert, deleteResource, id, router]);
+  }, [addAlert, deleteResource, id, onDeleted, router]);
 
   if (!isNew && resourceQuery.isLoading) {
     return (
@@ -178,8 +205,8 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
             <div className={styles.stateTitle}>Resource not found</div>
             <p className={styles.stateText}>This resource could not be loaded. It may have been removed or the id is invalid.</p>
             <div className={styles.stateActions}>
-              <Button variant="outline" tone="neutral" onClick={() => router.push('/resources')}>
-                Back to Resources
+              <Button variant="outline" tone="neutral" onClick={() => (onCancel ? onCancel() : router.push('/resources'))}>
+                {hostedInWorkspace ? 'Close Tab' : 'Back to Resources'}
               </Button>
             </div>
           </CardBody>
@@ -202,12 +229,14 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
         </div>
 
         <div className={styles.headerActions}>
-          <Button variant="ghost" tone="neutral" onClick={() => router.push('/resources')}>
-            Back to Resources
+          <Button variant="ghost" tone="neutral" onClick={() => (onCancel ? onCancel() : router.push('/resources'))}>
+            {hostedInWorkspace ? 'Close Tab' : 'Back to Resources'}
           </Button>
-          <Button variant="ghost" tone="neutral" onClick={() => router.push('/products')}>
-            Back to Products
-          </Button>
+          {!hostedInWorkspace ? (
+            <Button variant="ghost" tone="neutral" onClick={() => router.push('/products')}>
+              Back to Products
+            </Button>
+          ) : null}
         </div>
       </div>
 
@@ -219,13 +248,7 @@ export default function ResourceEditor({ id }: ResourceEditorProps) {
             <Button type="submit" variant="solid" tone="gold" disabled={disabled || !form.isValid || isUploading}>
               {createResource.isPending ? 'Creating...' : updateResource.isPending ? 'Saving...' : isNew ? 'Create Resource' : 'Save Changes'}
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              tone="neutral"
-              onClick={resetToCurrentSnapshot}
-              disabled={disabled}
-            >
+            <Button type="button" variant="outline" tone="neutral" onClick={resetToCurrentSnapshot} disabled={disabled}>
               Reset
             </Button>
           </div>

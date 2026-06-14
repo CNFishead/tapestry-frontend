@@ -1,5 +1,5 @@
 import { createAdminPageMetadata } from '@/app/pageMetadata';
-import ResourceEditor from '@/features/store/_components/resourceEditor/ResourceEditor.component';
+import ResourcesWorkspace from '@/features/store/_components/resourcesWorkspace/ResourcesWorkspace.component';
 
 export const metadata = createAdminPageMetadata({
   title: 'Edit Resource',
@@ -12,5 +12,5 @@ type PageProps = {
 
 export default async function ResourceDetailPage({ params }: PageProps) {
   const { id } = await params;
-  return <ResourceEditor id={id} />;
+  return <ResourcesWorkspace initialResourceId={id} />;
 }
