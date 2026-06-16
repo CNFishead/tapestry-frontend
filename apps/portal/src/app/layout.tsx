@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import "@tapestry/styles/index.scss";
+import '@tapestry/styles/index.scss';
 import './global.scss';
 import { SiteShell } from '@/layout/siteShell/SiteShell.layout';
+import QueryProvider from './QueryProvider';
 
 export const metadata: Metadata = {
   title: 'Tapestry',
@@ -24,7 +25,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
-        <SiteShell>{children}</SiteShell>
+        <QueryProvider>
+          <SiteShell>{children}</SiteShell>
+        </QueryProvider>
       </body>
     </html>
   );

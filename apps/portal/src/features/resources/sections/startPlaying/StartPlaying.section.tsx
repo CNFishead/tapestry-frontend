@@ -1,9 +1,30 @@
+'use client';
+
 import { InteractiveBook } from '@tapestry/ui';
 import { FiArrowUpRight, FiBookOpen, FiClock, FiDownload, FiFileText, FiMonitor, FiPrinter, FiUsers } from 'react-icons/fi';
-import { characterBuilderResource, playersGuideResource, printableSheetResource, quickstartResource } from './StartPlaying.data';
+import { useFetchResource } from '../../hooks/useFetchResource';
+import {
+  characterBuilderResource,
+  playersGuideResource,
+  printableSheetResource,
+  quickstartResource,
+  startPlayingResourceSlugs,
+  withFetchedActionResource,
+  withFetchedGuideResource,
+} from './StartPlaying.data';
 import styles from './StartPlaying.module.scss';
 
 export function StartPlayingSection() {
+  const { resource: quickstartResourceFromServer } = useFetchResource(startPlayingResourceSlugs.quickstart);
+  const { resource: characterBuilderResourceFromServer } = useFetchResource(startPlayingResourceSlugs.characterBuilder);
+  const { resource: printableSheetResourceFromServer } = useFetchResource(startPlayingResourceSlugs.printableSheet);
+  const { resource: playersGuideResourceFromServer } = useFetchResource(startPlayingResourceSlugs.playersGuide);
+
+  const quickstart = withFetchedGuideResource(quickstartResource, quickstartResourceFromServer);
+  const characterBuilder = withFetchedActionResource(characterBuilderResource, characterBuilderResourceFromServer);
+  const printableSheet = withFetchedActionResource(printableSheetResource, printableSheetResourceFromServer);
+  const playersGuide = withFetchedGuideResource(playersGuideResource, playersGuideResourceFromServer);
+
   return (
     <section id="start-playing" className={styles.section} aria-labelledby="start-playing-title">
       <header className={styles.header}>
@@ -23,9 +44,9 @@ export function StartPlayingSection() {
       <article className={styles.quickstartCard}>
         <div className={styles.bookStage}>
           <InteractiveBook
-            title={quickstartResource.title}
-            coverSrc={quickstartResource.coverSrc}
-            coverAlt={`${quickstartResource.title} cover`}
+            title={quickstart.title}
+            coverSrc={quickstart.coverSrc}
+            coverAlt={`${quickstart.title} cover`}
             expanded
             showMetadata={false}
             showSpineLabel={false}
@@ -36,39 +57,39 @@ export function StartPlayingSection() {
         </div>
 
         <div className={styles.quickstartCopy}>
-          <p className={styles.stepLabel}>{quickstartResource.eyebrow}</p>
-          <h2>{quickstartResource.title}</h2>
-          <p className={styles.resourceDescription}>{quickstartResource.description}</p>
+          <p className={styles.stepLabel}>{quickstart.eyebrow}</p>
+          <h2>{quickstart.title}</h2>
+          <p className={styles.resourceDescription}>{quickstart.description}</p>
 
           <ul className={styles.factList} aria-label="Quickstart details">
             <li>
               <FiUsers aria-hidden="true" />
-              {quickstartResource.facts[0]}
+              {quickstart.facts[0]}
             </li>
             <li>
               <FiUsers aria-hidden="true" />
-              {quickstartResource.facts[1]}
+              {quickstart.facts[1]}
             </li>
             <li>
               <FiBookOpen aria-hidden="true" />
-              {quickstartResource.facts[2]}
+              {quickstart.facts[2]}
             </li>
             <li>
               <FiClock aria-hidden="true" />
-              {quickstartResource.facts[3]}
+              {quickstart.facts[3]}
             </li>
             <li>
               <FiFileText aria-hidden="true" />
-              {quickstartResource.facts[4]}
+              {quickstart.facts[4]}
             </li>
           </ul>
 
           <div className={styles.actions}>
-            <a className={styles.primaryAction} href={quickstartResource.downloadHref} target="_blank" rel="noreferrer">
+            <a className={styles.primaryAction} href={quickstart.downloadHref} target="_blank" rel="noreferrer">
               <FiDownload aria-hidden="true" />
               Download the Quickstart
             </a>
-            <a className={styles.secondaryAction} href={quickstartResource.previewHref} target="_blank" rel="noreferrer">
+            <a className={styles.secondaryAction} href={quickstart.previewHref} target="_blank" rel="noreferrer">
               Preview the guide
               <FiArrowUpRight aria-hidden="true" />
             </a>
@@ -89,16 +110,16 @@ export function StartPlayingSection() {
               <FiMonitor />
             </div>
             <div>
-              <p className={styles.optionEyebrow}>{characterBuilderResource.eyebrow}</p>
-              <h3>{characterBuilderResource.title}</h3>
-              <p>{characterBuilderResource.description}</p>
+              <p className={styles.optionEyebrow}>{characterBuilder.eyebrow}</p>
+              <h3>{characterBuilder.title}</h3>
+              <p>{characterBuilder.description}</p>
             </div>
             <div className={styles.optionFooter}>
-              <a className={styles.primaryAction} href={characterBuilderResource.href} target="_blank" rel="noreferrer">
-                {characterBuilderResource.actionLabel}
+              <a className={styles.primaryAction} href={characterBuilder.href} target="_blank" rel="noreferrer">
+                {characterBuilder.actionLabel}
                 <FiArrowUpRight aria-hidden="true" />
               </a>
-              <span>{characterBuilderResource.accessNote}</span>
+              <span>{characterBuilder.accessNote}</span>
             </div>
           </article>
 
@@ -107,16 +128,16 @@ export function StartPlayingSection() {
               <FiPrinter />
             </div>
             <div>
-              <p className={styles.optionEyebrow}>{printableSheetResource.eyebrow}</p>
-              <h3>{printableSheetResource.title}</h3>
-              <p>{printableSheetResource.description}</p>
+              <p className={styles.optionEyebrow}>{printableSheet.eyebrow}</p>
+              <h3>{printableSheet.title}</h3>
+              <p>{printableSheet.description}</p>
             </div>
             <div className={styles.optionFooter}>
               <span className={styles.pendingAction} aria-disabled="true">
                 <FiFileText aria-hidden="true" />
                 Printable sheet coming soon
               </span>
-              <span>{printableSheetResource.accessNote}</span>
+              <span>{printableSheet.accessNote}</span>
             </div>
           </article>
         </div>
@@ -124,15 +145,15 @@ export function StartPlayingSection() {
 
       <article className={styles.guideCard}>
         <div className={styles.guideCopy}>
-          <p className={styles.stepLabel}>{playersGuideResource.eyebrow}</p>
+          <p className={styles.stepLabel}>{playersGuide.eyebrow}</p>
           <h2>Ready to build beyond the basics?</h2>
-          <p>{playersGuideResource.description}</p>
+          <p>{playersGuide.description}</p>
           <div className={styles.actions}>
-            <a className={styles.primaryAction} href={playersGuideResource.downloadHref} target="_blank" rel="noreferrer">
+            <a className={styles.primaryAction} href={playersGuide.downloadHref} target="_blank" rel="noreferrer">
               <FiDownload aria-hidden="true" />
               Download the full guide
             </a>
-            <a className={styles.secondaryAction} href={playersGuideResource.previewHref} target="_blank" rel="noreferrer">
+            <a className={styles.secondaryAction} href={playersGuide.previewHref} target="_blank" rel="noreferrer">
               Preview the guide
               <FiArrowUpRight aria-hidden="true" />
             </a>
@@ -141,9 +162,9 @@ export function StartPlayingSection() {
 
         <div className={styles.guideBook}>
           <InteractiveBook
-            title={playersGuideResource.title}
-            coverSrc={playersGuideResource.coverSrc}
-            coverAlt={`${playersGuideResource.title} cover`}
+            title={playersGuide.title}
+            coverSrc={playersGuide.coverSrc}
+            coverAlt={`${playersGuide.title} cover`}
             expanded
             showMetadata={false}
             showSpineLabel={false}

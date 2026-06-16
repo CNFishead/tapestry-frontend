@@ -1,5 +1,14 @@
+import type { LibraryResource } from '@tapestry/types';
+
 const quickstartFileId = '1SKBSzPQiSGeMonIjlrZMs6NTbOQTM1Wf';
 const playersGuideFileId = '1StakxqmJSl9Hakdf2zLIN27WhZO5B7GT';
+
+export const startPlayingResourceSlugs = {
+  quickstart: 'quickstart-guide',
+  characterBuilder: 'character-builder',
+  printableSheet: 'printable-character-sheet',
+  playersGuide: 'tapestry-players-guide',
+} as const;
 
 export const quickstartResource = {
   title: 'Tapestry Quickstart Guide',
@@ -35,3 +44,46 @@ export const playersGuideResource = {
   previewHref: `https://drive.google.com/file/d/${playersGuideFileId}/view`,
   downloadHref: `https://drive.google.com/uc?export=download&id=${playersGuideFileId}`,
 } as const;
+
+const HTTP_PROTOCOL_PATTERN = /^https?:\/\//i;
+
+function getHttpAssetHref(resource?: LibraryResource) {
+  const assetKey = resource?.currentRelease?.assetKey?.trim();
+  if (!assetKey || !HTTP_PROTOCOL_PATTERN.test(assetKey)) {
+    return undefined;
+  }
+
+  return assetKey;
+}
+
+export function withFetchedGuideResource<T extends typeof quickstartResource | typeof playersGuideResource>(fallback: T, resource?: LibraryResource): T {
+  const fetchedHref = getHttpAssetHref(resource);
+
+  return {
+    ...fallback,
+    title: resource?.title || fallback.title,
+    description: resource?.description || resource?.summary || fallback.description,
+    coverSrc: resource?.presentation?.coverImageUrl || fallback.coverSrc,
+    previewHref: fetchedHref || fallback.previewHref,
+    downloadHref: fetchedHref || fallback.downloadHref,
+  };
+}
+
+export function withFetchedActionResource<T extends typeof characterBuilderResource | typeof printableSheetResource>(fallback: T, resource?: LibraryResource): T {
+  const fetchedHref = getHttpAssetHref(resource);
+
+  if ('href' in fallback) {
+    return {
+      ...fallback,
+      title: resource?.title || fallback.title,
+      description: resource?.description || resource?.summary || fallback.description,
+      href: fetchedHref || fallback.href,
+    };
+  }
+
+  return {
+    ...fallback,
+    title: resource?.title || fallback.title,
+    description: resource?.description || resource?.summary || fallback.description,
+  };
+}
